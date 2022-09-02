@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메인페이지</title>
+    <link rel="stylesheet" href="main.css">
+    <script>
+        window.onload=function(){
+
+            document.querySelector(".j_menu1").addEventListener("click",function(event){
+                console.log("메뉴 눌렸어유1");
+            });
+
+            document.querySelector(".j_menu2").addEventListener("click",function(event){
+                console.log("메뉴 눌렸어유2");
+            });
+
+            document.querySelector(".j_menu3").addEventListener("click",function(event){
+                console.log("메뉴 눌렸어유3");
+            });
+
+            document.querySelector(".j_menu4").addEventListener("click",function(event){
+                console.log("버튼 눌렸어유4");
+            });
+
+            document.querySelector(".j_btn1").addEventListener("click",function(event){
+                console.log("버튼 눌렸어유1");
+            });
+
+            document.querySelector(".j_btn2").addEventListener("click",function(event){
+                console.log("버튼 눌렸어유2");
+            });
+
+            document.querySelector(".j_btn3").addEventListener("click",function(event){
+                console.log("버튼 눌렸어유3");
+            });
+
+        }
+        
+    </script>
+</head>
+<body>
+    <div id="j_hi">
+        <!-- <img src="./img/logo.png" id="j_logo"> -->
+        
+        <ul id="j_list">
+            <li class="j_menu1 j_menu">캘린더</li>
+            <li class="j_menu2 j_menu">커뮤니티</li>
+            <li class="j_menu3 j_menu">공지사항</li>
+            <li class="j_menu4 j_menu">운동</li>
+        </ul>
+            <div id = j_nav>                   
+                <input type ='button' class = "j_btn1 j_btn" onclick="location.href='../login/login.html'" value="로그인">
+                <input type ='button' class = "j_btn2 j_btn" onclick="location.href='../mypage/mypage.html'" value="마이페이지">
+                <input type ='button' class = "j_btn3 j_btn" onclick="location.href='../join/join.html'" value="회원가입">
+            </div>
+    </div>
+    <div id="j_bg" style="margin-top: 170px;"> 
+
+        <div class="container">
+            <p class="title title1">LET'S<p>
+        </div>
+        <div class="container">
+            <p class="title title2">WORKOUT<p>
+    </div>
+        <div class="container">
+            <p class="title title3">TOGETHER!<p>
+    </div>
+
+
+</body>
+</html>

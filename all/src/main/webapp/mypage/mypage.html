@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메인페이지</title>
+    <link rel="stylesheet" href="mypage.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.js">// jquery로딩완료</script>
+	
+<script>
+    window.onload=function(){
+    	bind();
+        document.querySelector(".j_menu1").addEventListener("click",function(event){
+            console.log("메뉴 눌렸어유1");
+        });
+
+        document.querySelector(".j_menu2").addEventListener("click",function(event){
+            console.log("메뉴 눌렸어유2");
+        });
+
+        document.querySelector(".j_menu3").addEventListener("click",function(event){
+            console.log("메뉴 눌렸어유3");
+        });
+
+        document.querySelector(".j_menu4").addEventListener("click",function(event){
+            console.log("버튼 눌렸어유4");
+        });
+
+        document.querySelector(".j_btn1").addEventListener("click",function(event){
+            console.log("버튼 눌렸어유1");
+        });
+
+        document.querySelector(".j_btn2").addEventListener("click",function(event){
+            console.log("버튼 눌렸어유2");
+        });
+
+        document.querySelector(".j_btn3").addEventListener("click",function(event){
+            console.log("버튼 눌렸어유3");
+        });
+        
+		
+    }
+
+
+	function bind() {
+		let option = {
+			url: "http://127.0.0.1:8080/all/yoo2",
+			type: "get",
+			dataType: 'json',
+			data: null,
+			success: function (data) {
+				try {
+					console.log(data);
+					drawChart(data);
+					drawSelect(data);
+					document.querySelector("#select_date").addEventListener("change", function (item) {
+						console.log("value ::::", document.querySelector("select option:checked").value);
+						let index = document.querySelector("select option:checked").value;
+						drawChart(data, data.length - index);
+					});
+				} catch (err) {
+					console.log("ERR", err);
+				}
+			},
+			error: function (err) { 
+				console.log("ERR view click", err);
+			},
+			complete: function (data) {
+				console.log("완료", data);
+			}
+		}
+		$.ajax(option);
+		return 1;
+	}
+
+	function drawChart(data, date_count = data.length) {
+		console.log("date_count", date_count);
+		let current_weight = [];
+		let target_weight = [];
+		let record_date = [];
+		
+		let j = 0;
+		for (let i =data.length - date_count; i < data.length; i++) {
+			console.log("j : ", j, ", i : ", i,", data.length : ",data.length, ", date_count : ",date_count );
+			current_weight[j] = data[i].current_weight;
+			target_weight[j] = data[i].target_weight;
+			record_date[j] = data[i].record_date;
+			j++;
+		}
+
+		let chartStatus = Chart.getChart("canvas");
+		if (chartStatus != undefined) {
+			chartStatus.destroy();
+		}
+
+		let ctx = document.getElementById('canvas').getContext('2d');
+		let mixedChart = new Chart(ctx, {
+			data: {
+				datasets: [
+					{
+						type: 'bar',
+						label: 'today 몸무게',
+						data: current_weight,
+						backgroundColor: [
+							//색상
+							'rgba(54, 79, 145, 0.2)',
+							'rgba(55, 109, 198, 0.2)',
+							'rgba(7, 147, 233, 0.2)',
+							'rgba(55, 99, 200, 0.2)',
+							'rgba(54, 79, 145, 0.2)',
+							'rgba(7, 147, 233, 0.2)',
+							'rgba(80, 120, 216, 0.2)'],
+						borderColor: [
+							//경계선 색상
+							'rgba(50, 66, 118, 1)', 'rgba(50, 66, 118, 1)',
+							'rgba(50, 66, 118, 1)',
+							'rgba(50, 66, 118, 1)',
+							'rgba(50, 66, 118, 1)',
+							'rgba(50, 66, 118, 1)'],
+						borderWidth: 1
+					}, {
+						type: 'line',
+						label: '목표 몸무게',
+						data: target_weight,
+						backgroundColor: ['rgba(63, 72, 204, 0.9)'],
+						borderColor: ['rgba(63, 72, 204, 0.9)'],
+						borderWidth: 2,
+					}],
+				labels: record_date
+			},
+		});
+	}
+	function drawSelect(data) {
+		let record_date = [];
+		let html = "";
+		$(data).each(function (index, item) { // 항목 추가
+			html += '<option class="select_date" value="' + index + '">' + item.record_date + '</option>';
+		});
+		$("#select_date").append($(html));
+
+	}
+</script>
+
+
+</head>
+<body>
+    <div id="j_hi">
+        
+        <!-- <img src="./img/logo.png" id="j_logo"> -->
+        
+        <ul id="j_list">
+            <li class="j_menu1 j_menu">캘린더</li>
+            <li class="j_menu2 j_menu">커뮤니티</li>
+            <li class="j_menu3 j_menu">공지사항</li>
+            <li class="j_menu4 j_menu">운동</li>
+        </ul>
+        <div id = j_nav> 
+            <input type ='button' class = "j_btn1 j_btn" onclick="location.href='../login/login.html'" value="로그인">
+            <input type ='button' class = "j_btn2 j_btn" onclick="location.href='../mypage/mypage.html'" value="마이페이지">
+            <input type ='button' class = "j_btn3 j_btn" onclick="location.href='../join/join.html'" value="회원가입">
+        </div>
+
+    </div>
+    
+    <div id="j_wrap">
+        <div id="j_box">
+            <div id="j_sec1">기본프로필</div>
+            <div id="j_sec2">
+	            <h3>차트 시작 날짜 선택</h3> 
+	            <select id="select_date"></select>
+				<canvas id="canvas"></canvas>
+			</div>
+            <!-- <div id="j_sec3">식단</div> -->
+        </div>
+    </div>
+
+</body>
+</html>

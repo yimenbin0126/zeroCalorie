@@ -1,0 +1,136 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-image: url('./img/sports.jpeg') ;
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: -230px; 
+    height: 900px;
+    color:white;
+    font-size:120px;
+    line-height:90px;
+    text-align:left;
+}
+
+/*캘린더~회원가입 묶음*/
+#j_hi {
+    margin-left: 30px;
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/*캘린더~운동 묶음*/
+#j_list {
+    font-size: 15px;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    display: inline-block;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-weight: bold;
+    vertical-align:top;
+}
+
+
+li{
+    float: left;
+    margin: 5px;
+    padding: 5px;
+}
+
+.j_menu{
+    padding: 5px 25px;
+    margin: 5px 25px; 
+    transition: opacity 0.4s ease-in-out;
+}
+
+.j_menu:hover{
+    opacity: 0.7;
+}
+
+/*버튼 묶음*/
+#j_nav{
+    height:  110px;
+    display: flex;
+    width: 450px;
+    justify-content: space-evenly;
+    align-items: center;
+    
+}
+
+/*버튼*/
+.j_btn {
+    width: 100px;
+    height: 30px;
+    border: none ;
+    border-radius: 30px;
+    background-color: rgba(245, 245, 220, 0);
+    border: 1px solid rgb(255, 255, 255);
+    color: aliceblue;
+    font-size: 13px;
+    transition: background 0.5s ease-in-out,
+                color 0.5s ease-in-out;
+}
+
+.j_btn:hover{
+    background: white;
+    color: rgb(92, 107, 192);
+}
+
+/*let's workout together div*/
+.container {
+    height:120px;
+    margin: 0 auto;
+    position:relative;
+    overflow:hidden;
+}
+
+.title {
+    display:inline;
+    position:relative;
+}
+
+.title1 {
+    animation-name: intro;
+    animation-duration:0.3s;
+    animation-iteration-count:1;
+    animation-timing-function:ease;
+    animation-delay:1s;
+    animation-fill-mode:both;
+    margin-left: 450px;
+}
+
+@keyframes intro {
+    0% {
+        top:150px;
+    } 
+    98% {
+     top:-5px;
+    }
+    100% {
+        top:0%;
+        } 
+            } 
+
+.title2 {
+    animation-name: intro;
+    animation-duration:0.2s;
+    animation-iteration-count:1;
+    animation-timing-function:ease;
+    animation-delay:1.2s;
+    animation-fill-mode:backwards;
+    margin-left: 150px;
+}
+
+.title3 {
+    animation-name: intro;
+    animation-duration:0.1s;
+    animation-iteration-count:1;
+    animation-timing-function:ease;
+    animation-delay:1.4s;
+    animation-fill-mode:backwards;
+    margin-left: 100px;
+}
