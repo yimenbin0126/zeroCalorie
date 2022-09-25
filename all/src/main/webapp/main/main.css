@@ -52,7 +52,7 @@ li{
 }
 
 /*버튼 묶음*/
-#j_nav{
+#j_nav, #e_nav{
     height:  110px;
     display: flex;
     width: 450px;
@@ -62,7 +62,7 @@ li{
 }
 
 /*버튼*/
-.j_btn {
+.j_btn, .e_btn {
     width: 100px;
     height: 30px;
     border: none ;
@@ -75,7 +75,8 @@ li{
                 color 0.5s ease-in-out;
 }
 
-.j_btn:hover{
+.j_btn:hover,
+.e_btn:hover{
     background: white;
     color: rgb(92, 107, 192);
 }
@@ -133,4 +134,8 @@ li{
     animation-delay:1.4s;
     animation-fill-mode:backwards;
     margin-left: 100px;
+}
+
+#e_welcome {
+	font-size: 13px;
 }

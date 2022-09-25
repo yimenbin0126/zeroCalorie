@@ -1,0 +1,58 @@
+/* 게시판 전체 */
+#e_box {
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.first_h1 {
+	margin-bottom: 20px;
+}
+
+.e_td {
+	color: white;
+	background-color: #273DB2;
+}
+
+.e_td, .e_input {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.blank {
+	height: 20px;
+}
+
+#tr_btn_modify td {
+	display: inline-block;
+}
+
+#btn_update, #btn_no {
+	font-weight: bold;
+	//font-size: 15px;
+	padding: 10px 5px 10px 5px;
+	border: none;
+	color: white;
+	background-color: gray;
+}
+
+#tr_btn td input:not(.back_btn) {
+	font-weight: bold;
+	font-size: 15px;
+	padding: 10px 30px 10px 30px;
+	border: none;
+	color: white;
+	background-color: #273DB2;
+}
+
+#tr_btn td input:not(last-child) {
+	margin-right: 5px;
+}
+
+.back_btn {
+	font-weight: bold;
+	font-size: 15px;
+	padding: 10px 30px 10px 30px;
+	border: none;
+	color: white;
+	background-color: gray;
+}

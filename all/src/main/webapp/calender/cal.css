@@ -1,0 +1,508 @@
+* {
+    padding : 0;
+    margin : 0;
+}
+
+
+
+body{
+    /*j*/
+    background-image: url('./img/back3.jpeg');
+    background-repeat: no-repeat;
+    background-size:cover;
+    color: rgb(39, 56, 104);
+
+}
+
+#j_wrap {
+    text-align: center;
+    /* width: 1263px; 여기 width 왜 준것인지..? */
+    height: 1450px;
+    padding-left: 0px; /*여기 .. 0줄거면 왜...*/
+}
+
+#j_box{
+    display: flex;  /* 여기 flex 왜 준것인지?*/
+    width: 1100px;
+    height: 2000px;
+    background-color: rgb(228, 234, 253);
+    display: inline-block;
+    margin-bottom: 30px;
+    margin-top: 20px;
+
+}
+
+#j_hi {
+    margin-left: 30px;
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/*버튼 묶음*/
+#j_nav {
+    height:  110px;
+    display: flex;
+    width: 450px;
+    justify-content: space-evenly;
+    align-items: center;  
+}
+
+/*버튼*/
+.j_btn {
+    width: 100px;
+    height: 30px;
+    border: none ;
+    border-radius: 30px;
+    background-color: rgba(245, 245, 220, 0);
+    border: 1px solid rgb(255, 255, 255);
+    color: aliceblue;
+    font-size: 13px;
+    transition: background 0.5s ease-in-out,
+                color 0.5s ease-in-out;
+}
+
+.j_btn:hover{
+    background: white;
+    color: rgb(92, 107, 192);
+}
+
+/*캘린더~운동 묶음*/
+#j_list {
+    font-size: 15px;
+    margin-top: 30px;
+    padding: 0px;
+    list-style: none;
+    display: inline-block;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-weight: bold;
+    vertical-align:top;
+}
+
+.j_menu{
+    padding: 5px 25px;
+    margin: 5px 25px; 
+    transition: opacity 0.4s ease-in-out;
+    float: left; 
+}
+
+.j_menu:hover{
+    opacity: 0.7;
+}
+
+/* text창에 focus 되었을때 라인 표시 안되게 */
+#j_msg1,#j_msg2,#yoo_chr_input,#yoo_find_input:focus{
+	outline : none;
+} 
+
+#j_msg1,#j_msg2{
+	border : 0px;
+	border-bottom : 1px solid black;
+	background-color : rgba(240,248,255,0);
+	width : 30%;
+	margin-left : 30px; 
+	padding-top : 20px;
+	margin-bottom: 30px;
+}
+
+#j_app1,#j_app2{
+	border-radius : 10%;
+	color : rgb(92,107,192);
+	border :1px solid rgb(92,107,192);
+	width : 40px;
+	
+}
+
+
+
+.j_todolist_wrap{
+	/* border: 1px solid red; */
+	font-size : 13px;
+	text-align : left;
+	margin-top : 50px;
+	background-color: whitesmoke;
+}
+
+.j_name {
+font-size:15px; 
+font-weight : bold;  
+padding : 15px 0px 15px 0px;
+}
+
+.j_ul {
+	margin-left : 40px; 
+}
+
+.j_li{
+	text-align : left;
+	padding-bottom : 5px;
+}
+
+/* 폼들을 1줄 차지하지 않게 */
+.tdl_del_form, .tdl_mod_form, #chr_rep_form{
+	display : inline-block;
+}
+
+
+
+
+
+/* 이전달, 다음달 버튼 */
+#pre_month, #next_month{
+    width: 100px;
+    height: 30px;
+    border: none ;
+    border-radius: 30px;
+    background-color: rgba(245, 245, 220, 0);
+    border: 1px dotted rgba(255, 255, 255,0.8);
+    color: #14279B;
+    font-size: 13px;
+    transition: background 0.5s ease-in-out,
+                color 0.5s ease-in-out;
+}
+#pre_month:hover, #next_month:hover{
+    background: rgba(255, 255, 255,0.5);
+    /* color: #5C7AEA; */
+    color: wheat;
+}
+
+
+    
+
+   
+#yoo_h3_cal{
+    color: #14279B;
+    display: inline-block;
+}
+#yoo_h5_year{
+    color: #14279B;
+    margin: 0px;
+}
+#yoo_Calendar{
+    margin: 0 auto;
+
+}
+
+#yoo_tr_01,
+#yoo_tr_02,
+#yoo_tr_03,
+#yoo_tr_04,
+#yoo_tr_05,
+#yoo_tr_06 {
+    /* height: 100px; */
+    vertical-align: top;
+}
+
+
+/*숫자 입력된 칸, pre next month*/
+.cursor_hand{
+    cursor: pointer;
+    transition: background 0.5s ease-in-out,
+    color 0.5s ease-in-out;
+}
+.cursor_hand:hover{
+    background: rgba(255, 255, 255,0.5);
+    color: wheat;
+    
+
+}
+
+.yoo_td_h3{
+    /* border: 1px solid red; */
+    /* background-color: rgb(202, 212, 241); */
+    display: inline-block;
+    font-size: 15px;
+    margin: 0; 
+    
+}
+
+.cell{
+	justify-content: end;
+    color: #14279B;
+    
+    
+}    
+
+.cell ul>li{
+	 font-size: 12px;
+	 line-height: 0px;
+	 
+}
+
+.hide{
+    display: none;
+}
+
+
+#disp_year_month{
+    /* border: 1px solid rgb(157, 157, 215); */
+    width: 700px;
+    text-align: center;
+    margin: 30px auto;
+    margin-top: 50px;
+   
+}
+
+
+/* 프로필 이미지 */
+.pro_img{
+	width: 200px;
+	height: 200px;
+	border-radius:100px;
+}
+#yoo_pro_chr_find_obj{
+    height:300px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/*프로필 관련*/
+#yoo_profile_obj{
+    width: 200px;
+    height: 250px;
+    display: inline-block;
+}
+
+/*응원메세지 관련*/
+#yoo_chr_obj{ 
+    width: 400px;
+    height: 200px;
+    display: inline-block;
+}
+/*응원메세지 버튼+입력창 div 플렉스*/
+#yoo_chr_input_btn, #yoo_find_input_btn {
+    display: flex;
+}
+
+/*응원메세지입력*/
+#yoo_chr_input{
+    height:41px;
+    width: 348px;
+    color:#3D56B2;
+    border: 1px solid #3D56B2;
+    /* border-top: 3px solid rgb(136, 136, 215); */
+    /* border-radius: 5px; */
+}
+/*응원메세지입력버튼*/
+#yoo_chr_btn{
+    cursor: pointer;
+    height: 43px;
+    width: 50px;
+    /* border-radius: 5px; */
+    background: #3D56B2;
+    border: 1px solid #3D56B2;
+    border-bottom: 4px solid #3D56B2;
+    color: white;
+    transition: background 0.5s ease-in-out,
+    color 0.5s ease-in-out,
+    border 0.5s ease-in-out,
+    bottom 0.5s ease-in-out;
+} 
+#yoo_chr_btn:hover{
+    background: #5C7AEA;
+    border: 1px solid #5C7AEA;
+    border-bottom: 4px solid #5C7AEA;
+    color:  #E6E6E6;
+}
+
+/*응원메세지표시창*/
+#yoo_chr_view{
+	margin-top: 5px;
+    display: inline-block;
+    width: 400px;
+    height: 132px;
+    overflow: auto;
+    color: black;
+    text-align: left;
+    /* border: 1px dotted rgb(136, 136, 215); */
+}
+
+/*생성된 메세지*/
+.yoo_chr_msg{
+color: #14279B;
+border-bottom: 1px dotted #5C7AEA;
+display: inline-block;
+}
+
+
+
+/* ///////////동현씨가 할 부분 ////////////////// */
+/*친구찾기 관련*/
+#yoo_find_obj{
+    height: 200px;
+    width: 202px;
+    display: inline-block;
+}
+
+/*친구찾기입력*/
+#yoo_find_input{
+    height:41px;
+    width: 150px;
+    color: rgb(136, 136, 215);
+    border: 1px solid rgb(136, 136, 215);
+    /* border-top: 3px solid rgb(136, 136, 215); */
+    /* border-radius: 5px; */
+}
+/*친구찾기입력버튼*/
+#yoo_find_btn{
+    height: 43px;
+    width: 50px;
+    /* border-radius: 5px; */
+    background: rgb(136, 136, 215);
+    border: 1px solid rgb(136, 136, 215);
+    border-bottom: 4px solid rgb(136, 136, 215);
+    color: white;
+} 
+
+/*친구찾기표시창*/
+#yoo_find_view{
+	margin-top: 5px;
+    height: 130px;
+    width: 200px;
+    overflow: auto;
+    color: inline-black;
+    text-align: left;
+    /* border: 1px dotted rgb(136, 136, 215); */
+}
+
+/* ///////////동현씨가 할 부분 ////////////////// */
+
+
+/*라인*/
+/* #yoo_find_obj{border: 1px solid red;}
+#yoo_chr_obj{ border: 1px solid red;}
+
+#yoo_pro_chr_find_obj{border: 10px solid blue;} 
+
+#yoo_profile_obj{border: 1px solid red;} */
+ 
+
+ 
+ 
+ 
+ /* 테이블 크기 고정*/
+table{
+ 	table-layout:fixed;
+}
+
+/* 캘린더 선 */
+td, th{border: 1px solid #14279B;}
+
+/* 캘린더 cell 크기 */
+td{
+	height: 150px;
+    width: 150px;
+}
+
+/* cell 안의 ul */
+.cell ul{
+	margin : 15px;
+ 	width: 120px;
+	height: 100px;
+	text-align: left;
+	
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden; 
+}
+
+/* cell 안의 li */
+.cell ul>li{
+	margin: 0px;
+	padding : 0px;
+ 	width: 120px;
+ 	height: 20px;
+ 	line-height: 20px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.contents_hide{
+	display: none;
+}
+
+
+
+
+
+
+
+/*투두리스트*/
+#j_msg1,#j_msg2,.contents_hide_text:focus{
+   outline : none;
+} 
+
+.contents_hide_text{
+   border : 0px;
+   border-bottom : 1px solid black;
+   background-color : rgba(240,248,255,0);
+   width : 260px;
+}
+
+#j_msg1,#j_msg2{
+   border : 0px;
+   border-bottom : 1px solid black;
+   background-color : rgba(240,248,255,0);
+   width : 260px;
+   margin-left : 30px; 
+   padding-top : 20px;
+   margin-bottom: 30px;
+}
+
+#j_app1,#j_app2,.button_mod,.contents_hide_btn, .del_chr, #rep_chr{
+   border-radius : 10%;
+   color : rgb(92,107,192);
+   border :1px solid rgb(92,107,192);
+}
+
+
+.j_todolist_wrap{
+   /* border: 1px solid red; */
+   font-size : 13px;
+   text-align : left;
+   margin-top : 50px;
+   background-color: whitesmoke;
+}
+
+.j_name {
+font-size:15px; 
+font-weight : bold;  
+padding : 15px 0px 15px 0px;
+}
+
+.j_ul {
+   margin-left : 40px; 
+}
+
+.j_li{
+   text-align : left;
+   padding-bottom : 5px;
+}
+
+/* 폼에게 inline-block */
+.tdl_del_form, .tdl_mod_form, .chr_del_form{
+   display : inline-block;
+}
+
+
+
+
+/* 수정, 삭제 버튼 관련 */
+.button_mod,.contents_hide_btn,.button_del{
+   border:0px;
+   background-color: rgba(255,255,255,0);
+   padding-left : 0px;
+}
+
+.button_mod_cancle,.contents_hide_btn,.button_del{
+   width : 25px;
+}
+
+/* 댓글달기 관련*/
+#rep_chr{
+	display: inline-block;
+	
+}

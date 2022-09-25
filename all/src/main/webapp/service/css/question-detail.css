@@ -1,0 +1,145 @@
+.e_div {
+	display:flex;
+	text-align: left;
+}
+
+/* 왼쪽 카데고리 */
+.e_nav {
+	width:250px;
+	background-color: lightgray;
+}
+
+.e_nav_all, .e_nav_onebyone {
+	padding: 15px 0px 15px 20px;
+	background-color: darkgray;
+	border-bottom: 1.5px solid gray;
+}
+
+.e_nav_question {
+	padding: 5px 0px 5px 20px;
+	display: flex;
+	align-items: center;
+	background-color: gray;
+	color: white;
+}
+
+.e_nav_question img {
+	width: 40px;
+	height: 40px;
+	float: left;
+	padding-left: 30px;
+}
+
+/* 오른쪽 카데고리 */
+/* 상단 */
+.e_right {
+	width: 100%;
+}
+
+.e_hd_top {
+	padding: 25px 30px 30px 0px;
+	text-align: right;
+}
+
+.e_hd_top_que {
+	font-size: 30px;
+	font-weight: bold;
+	padding-bottom: 30px;
+	margin: 0px 50px 50px 50px;
+	border-bottom: 1px solid gray;
+}
+
+/* 내용 */
+.e_hd_top_con, .e_button {
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+.e_con_title, .e_explain_member, .e_con_content {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.e_con_title {
+	font-weight: bold;
+	border-top: 1px solid gray;
+	background-color: lightgray;
+}
+
+.e_con_title, .e_con_explain, .e_con_content {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	border-bottom: 1px solid gray;
+}
+
+/* 내용 - 설명 */
+.e_con_explain {
+	display: flex;
+	justify-content : space-between;
+}
+
+.e_explain_date {
+	margin-right: 30px;
+}
+
+.e_blank {
+	padding-bottom: 60px;
+}
+
+/* 좋아요 */
+.e_con_content {
+	padding-bottom: 40px;
+}
+
+.e_content_like {
+	background-color: lightgray;
+	width: 100px;
+	height: 100px;
+	border-radius: 100px;
+	text-align: center;
+	color: red;
+	margin: 0 auto;
+}
+
+.e_like_heart, .e_like_num {
+	font-size: 35px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.e_like_heart{
+	line-height: 70px;
+	
+}
+
+.e_like_num {
+	line-height: 0px;
+	font-size: 17px;
+}
+
+/* 글 버튼 */
+.e_button {
+	display: flex;
+	justify-content: center;
+}
+
+.e_btn_css {
+	margin: 30px 0px 30px 0px;
+	margin-right: 20px;
+	text-align: center;
+	font-size: 15px;
+	font-weight: bold;
+	padding: 13px;
+	width:90px;
+	border: none;
+	background-color: lightgray;
+}
+
+#e_btn_delete, #e_btn_fix {
+	color: white;
+	background-color: blue;
+}
+
+.e_hidden {
+	display: none;
+}

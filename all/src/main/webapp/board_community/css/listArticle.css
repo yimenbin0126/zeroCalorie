@@ -1,0 +1,39 @@
+/* 게시판 전체 */
+#e_box {
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+/* 게시판 목록 꾸밈 */
+table {
+    border-collapse: collapse;
+    border: none;
+    border-bottom: 1px solid #273DB2;
+}
+
+#table_header {
+	background-color: #273DB2;
+}
+
+#table_header td {
+	font-weight: bold;
+	height: 40px;
+	color: white;
+}
+
+.btn_class {
+	margin-top: 50px;
+	display: flex;
+	justify-content: center;
+}
+
+.btn_class a {
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+	width: 90px;
+	padding: 20px 40px 20px 40px;
+	border: none;
+	color: white;
+	background-color: #273DB2;
+}

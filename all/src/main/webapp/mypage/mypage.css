@@ -100,12 +100,124 @@ li{
 }
 
 /*그래프*/
-#j_sec2{
+#yoo_div{
     border: 1px solid black;
     width: 1000px;
-    height: 600px;
+    /* height:  수정했습니다 */
+    height: 700px;
     margin:20px 50px 30px 50px;
     display:block; 
     position:static;
 
 }
+
+
+
+
+/* 지수씨 기본 프로필 */
+
+.profile{
+
+	margin-left : 200px;
+	float : left;
+	margin-bottom:50px;
+}
+
+.profile_detail{
+	margin-left : 200px;
+	width : 500px;
+}
+
+.k_top {
+
+    display: inline-block;
+}
+
+.k_profile {
+	
+    width: 100px;
+    height: 100px;
+    border-radius: 70%;
+}
+.k_change_profile {
+
+    /*position: relative;*/
+    display: inline-block;
+    left: 40px;
+    width: 73px;
+    bottom: 15px;
+    padding-top : 10px;
+
+}
+h1 {
+
+    text-align: center;
+    color: black;
+    padding: 20px;
+}
+.k_back div{
+	
+    color: black;
+    text-align: center;
+    margin-bottom: 5px;
+}
+/*.k_tp_letter {
+	
+	display: inline-block;
+    opacity: 0;
+}*/
+.k_t_box input {
+	
+	display: inline-block;
+    position: relative;
+    left: 10px;
+    text-align: center;
+    width: 100px;
+    height: 23px;
+    border-radius: 30px;
+    border : 0px;
+}
+.k_t_box2,.k_t_box {
+
+	display: inline-block;
+    position: relative;
+    left: 17px;
+}
+.k_t_box2 input {
+
+	display: inline-block;
+    position: relative;
+    left: 20px;
+    text-align: center;
+    width: 198px;
+    height: 23px;
+    border-radius: 30px;
+    border : 0px;
+}
+.k_inline1 {
+	/*border:1px solid red;*/
+    display: inline-block;
+}
+.k_inline2 {
+	/*border:1px solid red;*/
+    display: inline-block;
+    position: relative;
+    left: 20px;
+}
+
+.k_btn_edit {
+
+	border:0px;
+    color: white;
+    background-color: black;
+    width: 470px;
+    height: 40px;
+    background-color: rgb(39, 56, 104);
+    
+}
+
+.edit_all{
+	margin: 30px 10px 0px 250px;
+	width:500px;	
+}
+

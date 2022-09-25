@@ -1,0 +1,148 @@
+.e_div {
+	display:flex;
+	text-align: left;
+}
+
+/* 왼쪽 카데고리 */
+.e_nav {
+	width:250px;
+	background-color: lightgray;
+}
+
+.e_nav_all, .e_nav_onebyone {
+	padding: 15px 0px 15px 20px;
+	background-color: darkgray;
+	border-bottom: 1.5px solid gray;
+}
+
+.e_nav_question {
+	padding: 5px 0px 5px 20px;
+	display: flex;
+	align-items: center;
+	background-color: gray;
+	color: white;
+}
+
+.e_nav_question img {
+	width: 40px;
+	height: 40px;
+	float: left;
+	padding-left: 30px;
+}
+
+/* 오른쪽 카데고리 */
+/* 상단 */
+.e_right {
+	width: 100%;
+}
+
+.e_hd_top {
+	padding: 25px 30px 30px 0px;
+	text-align: right;
+}
+
+.e_hd_top_title {
+	font-size: 30px;
+	font-weight: bold;
+	padding-bottom: 30px;
+	margin: 0px 50px 50px 50px;
+	border-bottom: 1px solid gray;
+}
+
+/* 카데고리별 */
+.e_content, .e_content_choice {
+	padding-left: 50px;
+	padding-right: 50px;	
+}
+
+.e_content div {
+	display: flex;
+}
+
+/* 글쓰기 유형 선택 */
+.e_select_title {
+	font-weight: bold;
+	font-size: 17px;
+}
+
+#e_con_choice {
+	padding: 10px;
+	margin: 10px 0px 15px 0px;
+}
+
+/* 글쓰기 */
+.e_ti_title, .e_cont_title {
+	font-weight: bold;
+	background-color: lightgray;
+}
+
+.e_con_title {
+	border-top: 1px solid gray;
+}
+
+/* 글쓰기 제목 */
+.e_ti_title {
+	padding: 10px 100px 10px 15px;
+} 
+
+.e_cont_title {
+	padding: 10px 100px 400px 15px;
+}
+
+/* 글쓰기 내용 */
+.e_ti_detail, .e_cont_detail {
+	background-color: white;
+	width:633px;
+}
+
+.e_ti_detail {
+	padding-left: 15px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.e_cont_detail {
+	padding-left: 15px;
+	padding-top: 10px;
+}
+
+.e_con_content {
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
+}
+
+/* 글쓰기 내용 - input */
+#e_ti_detail_input,
+#e_cont_detail_input {
+	width: 610px;
+	border: none;
+	outline: 0;
+}
+
+#e_cont_detail_input {
+	resize: none;
+	height: 400px;
+}
+
+
+
+/* 글쓰기 버튼 */
+.e_button {
+	margin-top: 60px;
+	margin-bottom: 100px;
+}
+
+.e_btn_write {
+	text-align: center;
+	margin: 0 auto;
+}
+
+.e_btn_write input {
+	font-weight: bold;
+	font-size: 15px;
+	width: 100px;
+	padding: 15px;
+	border: none;
+	color: white;
+	background-color: blue;
+}

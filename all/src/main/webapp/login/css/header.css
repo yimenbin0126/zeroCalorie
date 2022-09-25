@@ -1,0 +1,89 @@
+
+
+body{
+	/* e */
+	padding : 0;
+    margin : 0;
+	/*j*/
+    background-image: url('../img/back3.jpeg');
+    background-repeat: no-repeat;
+    background-size:cover;
+    color: rgb(39, 56, 104);
+}
+
+
+/*캘린더~회원가입 묶음*/
+#j_hi {
+    margin-left: 30px;
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/*버튼 묶음*/
+#j_nav {
+    height:  110px;
+    display: flex;
+    width: 450px;
+    justify-content: space-evenly;
+    align-items: center;  
+}
+
+/*버튼*/
+.j_btn {
+    width: 100px;
+    height: 30px;
+    border: none ;
+    border-radius: 30px;
+    background-color: rgba(245, 245, 220, 0);
+    border: 1px solid rgb(255, 255, 255);
+    color: aliceblue;
+    font-size: 13px;
+    transition: background 0.5s ease-in-out,
+                color 0.5s ease-in-out;
+}
+
+.j_btn:hover{
+    background: white;
+    color: rgb(92, 107, 192);
+}
+
+/*캘린더~운동 묶음*/
+#j_list {
+    font-size: 15px;
+    margin-top: 30px;
+    padding: 0px;
+    list-style: none;
+    display: inline-block;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-weight: bold;
+    vertical-align:top;
+}
+
+.j_menu{
+    padding: 5px 25px;
+    margin: 5px 25px; 
+    transition: opacity 0.4s ease-in-out;
+    float: left; 
+}
+
+.j_menu:hover{
+    opacity: 0.7;
+}
+
+
+
+#j_wrap {
+    text-align: center;
+    height: 1450px;
+}
+
+
+#j_box{
+    width: 1100px;
+    background-color: rgb(228, 234, 253);
+    display: inline-block;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}

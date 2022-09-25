@@ -1,0 +1,198 @@
+* {
+    padding : 0;
+    margin : 0;
+}
+
+body{
+    /*j*/
+    background-image: url('./img/back3.jpeg');
+    background-repeat: no-repeat;
+    background-size:cover;
+    color: rgb(39, 56, 104);
+}
+
+#j_wrap {
+    text-align: center;
+	display:flex;
+	justify-content: space-around;
+    padding-left: 0px;
+}
+
+
+#j_box{
+    display: flex;
+    width: 1100px;
+    height: 1400px;
+    background-color: rgb(228, 234, 253);
+    display: inline-block;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    padding-left: 0px;
+}
+
+#j_hi {
+    margin-left: 30px;
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/*버튼 묶음*/
+#j_nav {
+    height:  110px;
+    display: flex;
+    width: 450px;
+    justify-content: space-evenly;
+    align-items: center;  
+}
+
+/*버튼*/
+.j_btn {
+    width: 100px;
+    height: 30px;
+    border: none ;
+    border-radius: 30px;
+    background-color: rgba(245, 245, 220, 0);
+    border: 1px solid rgb(255, 255, 255);
+    color: aliceblue;
+    font-size: 13px;
+    transition: background 0.5s ease-in-out,
+                color 0.5s ease-in-out;
+}
+
+.j_btn:hover{
+    background: white;
+    color: rgb(92, 107, 192);
+}
+
+/*캘린더~운동 묶음*/
+#j_list {
+    font-size: 15px;
+    margin-top: 30px;
+    padding: 0px;
+    list-style: none;
+    display: inline-block;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-weight: bold;
+    vertical-align:top;
+}
+
+li{
+    float: left;
+    margin: 5px;
+    padding: 5px;
+}
+
+.j_menu{
+    padding: 5px 25px;
+    margin: 5px 25px; 
+    transition: opacity 0.4s ease-in-out;
+}
+
+.j_menu:hover{
+    opacity: 0.7;
+}
+
+
+#j_sec1 {
+    border: 1px solid black;
+    width: 1000px;
+    height: 400px;
+    margin: 50px 50px 50px 50px;
+}
+
+h1 {
+    text-align: center;
+    color: black;
+    padding: 20px;
+
+}
+
+.k_profile_detail {
+    margin-left: 200px;
+    width: 500px;
+}
+
+#k_save_btn {
+    border: 0px;
+    color: white;
+    background-color: black;
+    width: 470px;
+    height: 40px;
+    background-color: rgb(39, 56, 104);
+    margin: 40px;
+    margin-left: 80px;
+
+}
+
+.k_t_box .k_t_box2 {
+    display: inline-block;
+    position: relative;
+    left: 20px;
+    text-align: center;
+}
+
+.k_t_box2 input {
+
+    display: inline-block;
+    position: relative;
+    left: 20px;
+    text-align: center;
+    width: 198px;
+    height: 23px;
+    border-radius: 30px;
+    border: 0px;
+}
+
+.k_t_box input {
+
+    display: inline-block;
+    position: relative;
+    left: 10px;
+    text-align: center;
+    width: 100px;
+    height: 23px;
+    border-radius: 30px;
+    border: 0px;
+}
+
+#name {
+    display: inline-block;
+    position: relative;
+    left: 50px;
+    margin-bottom: 10px;
+}
+#nickname {
+    display: inline-block;
+    position: relative;
+    left: 70px;
+}
+#gender {
+    display: inline-block;
+    position: relative;
+    left: 34px;
+}
+#height {
+    display: inline-block;
+    position: relative;
+    left: 70px;
+    margin-bottom: 10px;
+}
+#height input {
+    position: relative;
+    left: 27px;
+}
+#tel {
+    position: relative;
+    left: 50px;
+    margin-bottom: 10px;
+}
+#email {
+    position: relative;
+    left: 42px;
+}
+#email input {
+    position: relative;
+    left: 38px;
+}

@@ -1,0 +1,170 @@
+
+.e_div {
+	display:flex;
+	text-align: left;
+}
+
+/* 왼쪽 카데고리 */
+.e_nav {
+	width:250px;
+	background-color: lightgray;
+}
+
+.e_nav_all, .e_nav_onebyone {
+	padding: 15px 0px 15px 20px;
+	background-color: darkgray;
+	border-bottom: 1.5px solid gray;
+}
+
+.e_nav_question {
+	padding: 5px 0px 5px 20px;
+	display: flex;
+	align-items: center;
+	background-color: gray;
+	color: white;
+}
+
+.e_nav_question img {
+	width: 40px;
+	height: 40px;
+	float: left;
+	padding-left: 30px;
+}
+
+/* 오른쪽 카데고리 */
+/* 상단 */
+.e_right {
+	width: 100%;
+}
+
+.e_hd_top {
+	padding: 25px 30px 30px 0px;
+	text-align: right;
+}
+
+.e_hd_top_que, .e_hd_top_con {
+	padding: 0px;
+	text-align: center;
+}
+
+.e_hd_top_write, .e_hd_choice {
+	padding: 0px 0px 30px 50px;
+}
+
+.e_hd_top_que {
+	font-size: 30px;
+	font-weight: bold;
+	padding-bottom: 15px;
+}
+
+/* 글쓰기 */
+.e_hd_top_write {
+	font-size: 17px;
+	margin: 30px 0px 30px 710px;
+	padding: 15px 40px 15px 40px;
+	color: white;
+	background-color: blue;
+	border-radius: 5px;
+	border: none;
+}
+
+/* 카데고리 선택 */
+.e_hd_choice {
+	display: flex;
+}
+
+.e_hd_choice div {
+	font-size: 17px;
+	background-color: lightgray;
+	padding: 20px 132px 20px 132px;
+}
+
+#e_choice_guide {
+	color: white;
+	background-color: gray;
+}
+
+
+/* 카데고리별 */
+.e_content {
+	margin: 0px 60px 0px 50px;
+}
+
+/* 회원정보 관리 */
+.e_content div > ul {
+	display: flex;
+	justify-content : space-between;
+	border-bottom: 1px solid gray;
+	padding: 0;
+	margin: 0;
+}
+
+.e_content div > ul:nth-child(1) {
+	border-top: 1px solid gray;
+	font-weight: bold;
+}
+
+.e_content ul li {
+	list-style: none;
+	text-align: center;
+}
+
+
+/* ul li 순서 간격넣기 */
+.e_content ul li:nth-child(1) {
+	padding: 10px 5px 10px 15px;
+	width: 50px;
+}
+
+.e_content ul li:nth-child(2) {
+	padding: 10px 5px 10px 10px;
+	width: 300px;	
+}
+
+.e_content ul li:nth-child(3) {
+	padding: 10px 5px 10px 10px;
+	width: 80px;	
+}
+
+.e_content ul li:nth-child(4) {
+	padding: 10px 5px 10px 10px;
+	width: 100px;	
+	
+}
+
+.e_content ul li:nth-child(5) {
+	padding: 10px 15px 10px 5px;
+	width: 60px;	
+}
+
+
+/* 페이징 */
+.e_paging {
+	margin-top: 40px;
+	margin-bottom: 100px;
+	display: flex;
+	justify-content: center;
+}
+
+.e_paging div:not(.e_paging_btnright) {
+	margin-right: 10px;
+}
+
+.e_paging_num {
+	display: flex;
+}
+
+.e_paging_num div {
+	margin-right: 10px;
+}
+
+.e_paging_num div:last-child {
+	margin-right: 0px;
+}
+
+.e_paging_btnleft, .e_paging_btnright, .e_paging_num div {
+	padding: 10px;
+	width: 20px;
+	text-align:center;
+	background-color: lightgray;	
+}

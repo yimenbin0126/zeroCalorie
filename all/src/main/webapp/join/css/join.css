@@ -1,0 +1,187 @@
+
+/* input 포커싱 테두리 제거 */
+input:focus {
+    outline: none;
+}
+
+/* 경고창 */
+.e_errorindex {
+    color: red;
+    font-size: 13px;
+    padding-bottom: 10px;
+    display: none;
+}
+
+.e_checkindex {
+	color: green;
+    font-size: 13px;
+    padding-bottom: 10px;
+    display: none;
+}
+
+/* 뒤로가기(로그인하기) */
+.e_back {
+	padding-top: 25px;
+}
+
+#e_back_btn {
+    /* margin-top: 15px; 
+    padding: 10px;
+    font-weight: bold;
+    color: white;
+    border: 0px;
+    background-color: rgb(43, 79, 170);
+    border-radius: 10px; */
+
+    width: 135px;
+    height: 33px;
+    margin-top: 15px;
+    margin-right: 900px;
+    border-radius: 30px;
+    border: 1px solid rgb(39, 56, 104);
+    background-color: rgba(245, 245, 220, 0);
+    font-size: 13px;
+    color: rgb(39, 56, 104);
+    transition: background 0.4s ease-in-out,
+                color 0.4s ease-in-out;
+}
+
+#e_back_btn:hover{
+    /*j*/
+    background: rgb(39, 56, 104);;
+    color: aliceblue;
+}
+
+/* 로고 */
+.e_logo {
+    font-size: 25px;
+    font-weight: bold;
+    /* padding: 50px 0 50px 0; */
+    padding: 30px 80px 65px 80px;
+    height: 30px;
+    border-bottom: 1px solid rgb(39, 56, 104);
+    text-align: center;
+}
+
+/* 아이디 */
+.e_id {
+    padding-top: 40px;
+}
+
+/* 아이디, 닉네임 중복 확인 */
+#e_idCheck, #e_nickCheck {
+	margin-top: 5px;
+    width: 373px;
+    padding: 13px;
+    border: 1px solid rgb(39, 56, 104);
+    border-radius: 30px;
+    background-color: rgba(245, 245, 220, 0);
+    color: rgb(39, 56, 104);
+    font-size: 13px;
+}
+
+#e_id_check, #e_nick_check {
+	display: none;
+	color: green;
+}
+
+/* 묶음 - 영역 */
+.e_id, .e_password, .e_password_more, .e_name, .e_nickname,
+.e_birth, .e_gender, .e_email, .e_tel, .e_sub,
+.e_height, .e_pro_img {
+    padding-bottom: 30px;
+}
+
+/* 묶음 - 제목 */
+.e_id > h4, .e_password > h4, .e_password_more > h4,
+.e_name > h4, .e_birth > h4, .e_gender > h4, .e_email > h4,
+.e_tel > h4, .e_nickname > h4, .e_height > h4, .e_pro_img > h4 {
+    padding-bottom: 10px;
+    font-size: 13px;
+    margin: 0px 30px 0px 350px;
+    display: flex;
+}
+
+/* 묶음 - input */
+#e_input_id, #e_input_pass, #e_input_pass_more,
+#e_input_name, #e_input_birth, #e_input_email, #e_input_tel,
+#e_input_nickname {
+    width: 350px;
+    padding: 13px;
+    font-size: 13px;
+    border-radius: 30px;
+    border: 1px solid rgb(255, 255, 255);
+    margin: 0px 35px 0px 35px;
+}
+
+/* 키 - input */
+#e_input_height {
+	width: 280px;
+    padding: 13px;
+    font-size: 13px;
+    border-radius: 30px;
+    border: 1px solid rgb(255, 255, 255);
+    margin: 0px 5px 0px 5px;
+}
+
+/* 성별 */
+.e_gender > #e_sel_gender {
+    padding: 8px;
+
+    border-radius: 30px;
+    border: 1px solid rgb(255, 255, 255);
+    margin: 0px 35px 0px 35px;
+}
+
+/* 프로필 사진 */
+#e_input_pro_img {
+	display: none;	
+}
+
+.e_input_pro_img_btn {
+	margin: 5px 10px;
+    padding: 13px;
+    border: 1px solid rgb(39, 56, 104);
+    border-radius: 10px;
+    background-color: rgba(245, 245, 220, 0);
+    color: rgb(39, 56, 104);
+    font-size: 13px;
+}
+
+#e_delete_file {
+    padding: 13px;
+    border: 1px solid rgb(39, 56, 104);
+    border-radius: 10px;
+    background-color: rgba(245, 245, 220, 0);
+    color: rgb(39, 56, 104);
+    font-size: 13px;
+}
+
+/* 회원가입 버튼 */
+#e_sub_btn {
+    /* width: 465px;
+    margin: 10px 0 50px 0;
+    padding: 15px;
+    border: 0px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: rgb(43, 79, 170); */
+
+    width: 400px;
+    margin: 10px 30px 50px 30px;
+    padding: 15px;
+    border: 1px solid rgb(39, 56, 104);
+    background-color: rgba(245, 245, 220, 0);
+    font-size: 12px;
+    color: rgb(39, 56, 104);
+    transition: background 0.4s ease-in-out,
+                color 0.4s ease-in-out;
+}
+
+#e_sub_btn:hover{
+    /*j*/
+    background: rgb(39, 56, 104);;
+    color: aliceblue;
+}
+

@@ -1,0 +1,112 @@
+
+
+/* 로고 */
+.e_logo {
+    font-size: 25px;
+    font-weight: bold;
+    padding: 80px 80px 60px 80px;
+    /* border-bottom: 1px solid gray; */
+    text-align: center;
+
+    /*j*/
+    border-bottom: 1px solid rgb(39, 56, 104);
+}
+
+/* 아이디 */
+.e_id {
+    padding-top: 50px;
+    padding-bottom: 10px;
+}
+
+/* 아이디, 비밀번호 */
+.e_id, .e_password {
+    display: flex;
+    justify-content: center;
+    align-items: baseline
+}
+
+#e_h4_id, #e_h4_pass {
+    margin-right: 20px;
+    width: 130px;
+    /* font-size: 20px; */
+
+    /*j*/
+    font-size: 14px;
+}
+
+#e_input_id, #e_input_pass {
+    padding: 15px;
+    width: 30%;
+
+    /*j*/
+    font-size: 13px;
+    border-radius: 30px;
+    border: 1px solid rgb(255, 255, 255);
+}
+
+#e_input_id:focus, #e_input_pass:focus {
+    outline: none;
+    padding-left: 10px;
+
+}
+
+/* 비밀번호 */
+.e_password {
+    padding-bottom: 30px;
+}
+
+/* 로그인 버튼 */
+/* .e_login {
+    /* padding-top: 20px; */
+
+#e_login_btn {
+    /* width: 100%;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    border: 0px;
+    background-color: rgb(43, 79, 170); */
+
+     /*j*/
+    width: 470px;
+    margin: 10px 0px 50px 45px;
+    padding: 15px;
+    border: 1px solid rgb(39, 56, 104);
+    background-color: rgba(245, 245, 220, 0);
+    font-size: 12px;
+    color: rgb(39, 56, 104);
+    transition: background 0.4s ease-in-out,
+                color 0.4s ease-in-out;
+}
+
+#e_login_btn:hover{
+    /*j*/
+    background: rgb(39, 56, 104);;
+    color: aliceblue;
+}
+
+/* 회원가입, 비밀번호 찾기 */
+.e_other {
+    /* padding-top: 20px; */
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 100px;
+    margin: 0px 40px 0px 80px;
+}
+
+.e_other a {
+    /* color: rgb(43, 79, 170);
+    font-weight: bold; */
+
+    color: rgb(39, 56, 104);
+    font-size: 13px;
+}
+
+ /*j*/
+.e_auto_login{
+    font-size: 13px;
+    width: 770px;
+    padding-bottom: 10px;
+}
+

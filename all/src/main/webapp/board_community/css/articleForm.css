@@ -1,0 +1,72 @@
+/* 게시판 전체 */
+#e_box {
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.e_box_write {
+	margin-left: 200px;
+	margin-right: 200px;
+}
+
+.header_title, .header_content {
+	background-color: white;
+	text-align: center;
+	display: flex;
+}
+
+.title {
+	font-weight: bold;
+	padding: 20px 40px 20px 40px;
+	color: white;
+	background-color: #273DB2;
+}
+
+#title_detail, #content_detail {
+	padding: 20px;
+	border: none;
+	width: 400px;
+}
+
+#title_detail {
+	width: 570px;
+	height: 100%;
+}
+
+#content_detail {
+	width: 570px;
+	height: 100%;
+}
+
+.header_content {
+	margin-top: 5px;
+	height: 500px;
+}
+
+.image_content {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.image_content div {
+	text-align: center;
+}
+
+/* 버튼 */
+.btn {
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+.btn input {
+	font-weight: bold;
+	font-size: 20px;
+	padding: 20px 40px 20px 40px;
+	border: none;
+	color: white;
+	background-color: #273DB2;
+}
+
+.btn input:first-child {
+	margin-right: 5px;
+}
