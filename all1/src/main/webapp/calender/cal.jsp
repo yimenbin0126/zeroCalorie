@@ -154,7 +154,7 @@ function yoo_addDataCal() {
 				item.querySelector("ul").appendChild(ctl);
 
 				// title 부분
-				//item.setAttribute("title", item.querySelector("ul").innerText);			
+				item.setAttribute("title", item.querySelector("ul").innerText);			
 			} 
 		<%}%>   
 	}); 
