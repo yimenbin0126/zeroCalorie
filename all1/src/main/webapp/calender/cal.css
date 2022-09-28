@@ -429,7 +429,6 @@ td{
 
 
 
-
 /*투두리스트*/
 #j_msg1,#j_msg2,.contents_hide_text:focus{
    outline : none;
@@ -452,7 +451,8 @@ td{
    margin-bottom: 30px;
 }
 
-#j_app1,#j_app2,.button_mod,.contents_hide_btn, .del_chr, #rep_chr{
+#j_app1,#j_app2,.button_mod,.contents_hide_btn, 
+.del_chr, #rpl_chr, .rpl_chr_btn, .chr_rpl_btn{
    border-radius : 10%;
    color : rgb(92,107,192);
    border :1px solid rgb(92,107,192);
@@ -483,7 +483,7 @@ padding : 15px 0px 15px 0px;
 }
 
 /* 폼에게 inline-block */
-.tdl_del_form, .tdl_mod_form, .chr_del_form{
+.tdl_del_form, .tdl_mod_form{
    display : inline-block;
 }
 
@@ -502,7 +502,11 @@ padding : 15px 0px 15px 0px;
 }
 
 /* 댓글달기 관련*/
-#rep_chr{
+#rep_chr,  .chr_del_form{
 	display: inline-block;
+}
+.chr_rpl_form{
+	display:none;
 	
 }
+

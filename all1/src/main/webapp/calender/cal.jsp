@@ -63,6 +63,12 @@ boolean mypage= (boolean)request.getAttribute("mypage");
 	
 	// 수정 취소 버튼 눌렸을 때
 	update_contents_cancel();
+	
+	// 댓글 달기 버튼 눌렀을때
+	click_rpl_chr_btn();
+	
+	// 응원메세지 댓글 입력 버튼 눌렀을 때
+	click_cheerMsgRplAdd();
 }
 
 // 이전달 버튼 눌렸을 때 
@@ -182,7 +188,7 @@ function yoo_addDataCal() {
 			<input type='button' class="j_btn2 j_btn" 
 						onclick="location.href='/all/mypage'" value="마이페이지">
 			<input type='button' class="j_btn3 j_btn"
-					onclick="clickLogout();"  value="로그아웃">
+					onclick="location.href='/all/logout'"  value="로그아웃">
 		</div>
 	</div>
 
@@ -208,38 +214,108 @@ function yoo_addDataCal() {
 				<div id="yoo_chr_obj">
 				
 					<!-- 응원메세지 입력창과 버튼 -->
-					<form method="post" action="" encType="utf-8" >
+					<form name="cheerMsgAdd_frm" action="" enctype="utf-8" method="post" onSubmit="return click_CheerMsgAdd(this)">
 						<div id="yoo_chr_input_btn">
-							<input id="yoo_chr_input" name="CHR_MSG" type="text" placeholder="응원메세지 남기기!"><input id="yoo_chr_btn" type="submit" value="입력">
+							<input id="yoo_chr_input" name="CHR_MSG" type="text" placeholder="응원메세지 남기기!"><input id="yoo_chr_btn" type="submit" value="입력" >
 							<input type="hidden" name="command" value="cheerMsgAdd" />
+							<input type="hidden" name="CHR_PARENTS_NO" value="0" />
 						</div>
 					</form>
 							
 					<!--응원메세지 출력창-->
 					<div id="yoo_chr_view">
 						<% List<CheerMsgVO> cheerMsglist = (ArrayList)request.getAttribute("cheerMsglist"); %>
+						
 						<% CheerMsgVO cheerMsgVO = new CheerMsgVO();
+							int nextDepth = 1;	// 다음 댓글의 자식 유무 판단
 	                    for(int i =0 ; i < cheerMsglist.size() ; i++){ %>
+	                    
+	                    	<% // 다음댓글의 번호가 1이면 자식이 없고(대댓), 2이면 자식이 있는것
+	                    	if(i< cheerMsglist.size()-2){
+	                    		CheerMsgVO nextVO = null;
+	                    		nextVO = (CheerMsgVO)cheerMsglist.get(i+1);
+	                    		nextDepth = nextVO.getDEPTH();
+	                    	// 다음 댓글이 없으면 자식이 없으므로 지워져도 되니까 다음댓글을 1로 임의로 지정
+	                    	}else{
+	                    		nextDepth = 1;
+	                    	}
+	                    	%>
+	                    	
 	                    	<!-- 응원메세지 1줄 div -->
 							<div class='yoo_chr_msg'>
 								<% cheerMsgVO = (CheerMsgVO)cheerMsglist.get(i);%>
+								<!-- DEPTH -->
+								<% // 대댓글 댓글 표현을 위한 여백 
+								for( int depth=0; depth<(cheerMsgVO.getDEPTH()-1)*2; depth++) {%>	
+								&nbsp;
+								<%} 
+									if(cheerMsgVO.getDEPTH()>1){%>
+									ㄴ
+									<% }%>
+								<!--  메세지 내용이 null이 아니면 내용 표시 -->	
+								<% if(cheerMsgVO.getCHR_MSG() !=null){%>
 								<!-- 글쓴이 -->
 								<a href='  <%=cheerMsgVO.getID() %>' style="color: gray; text-decoration: none;"> 
 									<%=cheerMsgVO.getNICKNAME() %>
 								</a>
 								<!-- 메세지 -->
 								<%=cheerMsgVO.getCHR_MSG() %>
+								<!--  메세지 내용이 null이면 삭제된 메세지로 표시 -->	
+								<%}else{ %>
+								삭제된 메세지 입니다
+							<%} %>
 							</div>
-							<!-- 응원메세지 지우기 버튼 (내 페이지일 경우) -->
-							<% if(mypage){ %>
+							<!-- 응원메세지 지우기 버튼 (내 페이지일 경우 또는 글쓴이)-->
+							<% if(mypage || (sessionUser.getMember_no()==cheerMsgVO.getFR_MEMBER_NO()) ){ %>
 								<!-- 지우기 버튼 눌렸을때 form -->
 								<form method="post" action="" encType="utf-8" class="chr_del_form">
 									<input class='yoo_chr_view_del_btn del_chr' type='submit' value='지우기'>
-									<input type="hidden" name="command" value="cheerMsgDel" />
 									<input type="hidden" name="CHR_NO" value="<%= cheerMsgVO.getCHR_NO()%>" />
+									<input type="hidden" name="command" value="cheerMsgDel" />
+									<input type="hidden" name="nowDepth" value="<%= cheerMsgVO.getDEPTH()%>" />
+									<input type="hidden" name="nextDepth" value="<%= nextDepth%>" />
+									
+									<% 
+									//지금 댓글의 원글 갯수와 정보를 보냄(parentsDapth)
+									// 레벨 은 1부터 시작, 현재 내 레벨 빼기 때문에 -1
+									//for( int pDapth = 0; pDapth>cheerMsgVO.getDEPTH()-1; pDapth++){
+									
+									// for 내 dapth-1 만큼 돌림 	
+									// if 이전 댓글이 null 인지? 맞으면
+										// if depth가 내 depth -1인가  맞으면  
+											// chr_no 저장
+										// else  : 돌필요 없음
+											// for문 끝냄
+									// else : 돌필요 없음
+										// for문 끝냄
+										
+										
+										
+									%>	
+									
+
+										 
+									<%// }%>
+									
+									
+									
+									
+									
+	
 								</form>
 							<% } %>
+							<!-- 응원메세지 댓글달기 버튼 ( 대댓글은 depth 4까지만 허용)-->
+							<% if(cheerMsgVO.getDEPTH()<4){%>
+							<input class="chr_rpl_btn" type='button' value='댓글달기'>
+							<%} %>
 							<br>
+							<!-- 응원 메세지 댓글 입력 -->
+							<form class="chr_rpl_form" name="chr_rpl_form"  action="" enctype="utf-8" method="post" onSubmit="return click_CheerMsgAdd(this)" >
+								ㄴ><input type="text" class="chl_rpl_input" name="CHR_MSG">
+								<input class='rpl_chr_btn ' type='submit' value='댓글입력' >
+								<input type="hidden" name="command" value="cheerMsgAdd" />
+								<input type="hidden" name="CHR_PARENTS_NO" value="<%=cheerMsgVO.getCHR_NO() %>" />
+							</form>
 						<% } %>
 					</div>
 
@@ -501,8 +577,6 @@ function yoo_addDataCal() {
 					<input type="hidden" name="pageDate" value="<%=date%>" /> 
 				</form>	
 				<%} %>
-
-
 			</div>
 		</div>
 	</div>

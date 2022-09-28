@@ -9,10 +9,27 @@ public class CheerMsgVO {
 	private Date CHR_TIME;
 	private int FR_MEMBER_NO;
 	private int TO_MEMBER_NO;
+	private int CHR_PARENTS_NO;
 	private String NICKNAME; 
 	private String ID;
-	   
-
+	private int DEPTH;
+	
+	
+	
+	
+	
+	public int getDEPTH() {
+		return DEPTH;
+	}
+	public void setDEPTH(int dEPTH) {
+		DEPTH = dEPTH;
+	}
+	public int getCHR_PARENTS_NO() {
+		return CHR_PARENTS_NO;
+	}
+	public void setCHR_PARENTS_NO(int cHR_PARENTS_NO) {
+		CHR_PARENTS_NO = cHR_PARENTS_NO;
+	}
 	public int getCHR_NO() {
 		return CHR_NO;
 	}

@@ -29,6 +29,8 @@ public class CalController extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		
+		System.out.println("-----------------------------------------------");
+		
 		boolean mypage;					// 내 페이지 인지 확인하는 변수(세션id=페이지id)
 		int calPageMbNo;				// 페이지 멤버no
 		String calPageMbNickName;		// 페이지 멤버닉넴
@@ -165,7 +167,18 @@ public class CalController extends HttpServlet {
 			cheerMsgAdd(request, calPageMbVO, sessionUserDTO);
 		// 응원메세지 삭제
 		} else if (command != null && command.equals("cheerMsgDel")) {
-			cheerMsgdel(request);
+			
+
+			// 대댓글이 없는 글이라면 삭제 (다음 댓글의 Depth가 현재 Depth 보다 작거나 같으면)
+			if(Integer.parseInt(request.getParameter("nextDepth"))<=Integer.parseInt(request.getParameter("nowDepth")) ) {
+				System.out.println("nextDepth : "+Integer.parseInt(request.getParameter("nextDepth")));
+				cheerMsgDel(request); 
+			// 대댓글이 있다면 내용만 비움(삭제된 메세지입니다로 표시하게됨)
+			}else {
+				System.out.println("nextDepth : "+Integer.parseInt(request.getParameter("nextDepth")));
+				cheerMsgEmpty(request);
+			}
+
 		// todolist 추가
 		} else if (command != null && "tdl_contentsAdd".equals(command)) {
 			todoListAdd(request, calPageMbVO);
@@ -202,14 +215,24 @@ public class CalController extends HttpServlet {
 		vo.setCHR_MSG(request.getParameter("CHR_MSG"));
 		vo.setFR_MEMBER_NO(sessionUserDTO.getMember_no());
         vo.setTO_MEMBER_NO(calPageMbVO.getMEMBER_NO());
+        vo.setCHR_PARENTS_NO(Integer.parseInt(request.getParameter("CHR_PARENTS_NO")));
         System.out.println(request.getParameter("CHR_MSG"));
         CheerMsgDAO cheerMsgDAO = new CheerMsgDAO();
         cheerMsgDAO.add(vo);
         System.out.println("cheerMsgAdd 성공");
 	}
 	
+	// 응원 msg db에서 메세지만 비움
+	public void cheerMsgEmpty(HttpServletRequest request) {
+		System.out.println("cheerMsgEmpty 요청");
+		CheerMsgVO vo = new CheerMsgVO();
+		vo.setCHR_NO(Integer.parseInt(request.getParameter("CHR_NO")));
+		CheerMsgDAO cheerMsgDAO = new CheerMsgDAO();
+        cheerMsgDAO.empty(vo);
+        System.out.println("cheerMsgEmpty 성공");
+	}
 	// 응원 msg db에서 삭제
-	public void cheerMsgdel(HttpServletRequest request) {
+	public void cheerMsgDel(HttpServletRequest request) {
 		System.out.println("cheerMsgdel 요청");
 		CheerMsgVO vo = new CheerMsgVO();
 		vo.setCHR_NO(Integer.parseInt(request.getParameter("CHR_NO")));
@@ -217,6 +240,7 @@ public class CalController extends HttpServlet {
         cheerMsgDAO.del(vo);
         System.out.println("cheerMsgdel 성공");
 	}
+	
 	
 	// calTodoRead 달력에 월간 정보 조회
 	public List<TodoListVO> calTodoRead(HttpServletRequest request, Map pageDateInfo, CalPageMbVO calPageMbVO) {

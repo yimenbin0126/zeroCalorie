@@ -151,7 +151,44 @@ function update_contents_cancel(){
 	});
 }
 
-function clickLogout(){
-	location.href='/all/logout';
+
+// 댓글 달기 버튼 눌렀을때
+function click_rpl_chr_btn(){
+	$(".chr_rpl_btn").off("click").on("click",function(){
+
+
+		// 모든 댓글달기 버튼 보이게
+		$(".chr_rpl_btn").show();
+		// 모든 댓글 입력 폼 숨기게
+		$(".chr_rpl_form").hide();
+		
+		// 댓글달기 버튼 누른 칸의 기존컨텐츠와 댓글 달기 버튼 숨김 
+		$(this).hide();
+
+		// 댓글달기 버튼 누른 칸의 입력창과 댓글 입력 폼 보임
+		$(this).next().next().show();
+	});
+}
+
+// 응원메세지 입력 버튼 눌렀을 때 내용 빈것 거름
+function click_CheerMsgAdd(form){
+	
+/*	// 입력창의 내용이 비었으면 경고 메세지
+	if(document.querySelector("#yoo_chr_input").value ==""){
+		 alert(' 응원 메세지 내용을 입력해주세요');
+		 return false;
+	// 그렇지 않을경우 입력 전달
+	}else{
+		return true;
+	}	*/
+	
+		// 입력창의 내용이 비었으면 경고 메세지
+	if(form.CHR_MSG.value ==""){
+		 alert(' 응원 메세지 내용을 입력해주세요');
+		 return false;
+	// 그렇지 않을경우 입력 전달
+	}else{
+		return true;
+	}	
 }
 
