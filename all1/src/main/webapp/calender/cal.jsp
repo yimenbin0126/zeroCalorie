@@ -276,30 +276,33 @@ function yoo_addDataCal() {
 									<input type="hidden" name="nextDepth" value="<%= nextDepth%>" />
 									
 									<% 
+									
 									//지금 댓글의 원글 갯수와 정보를 보냄(parentsDapth)
 									// 레벨 은 1부터 시작, 현재 내 레벨 빼기 때문에 -1
-									//for( int pDapth = 0; pDapth>cheerMsgVO.getDEPTH()-1; pDapth++){
-									
 									// for 내 dapth-1 만큼 돌림 	
-									// if 이전 댓글이 null 인지? 맞으면
-										// if depth가 내 depth -1인가  맞으면  
-											// chr_no 저장
-										// else  : 돌필요 없음
+									Loop1:
+									for( int pDapth = 1; pDapth<cheerMsgVO.getDEPTH(); pDapth++){
+										
+										// if 이전 댓글이 null 인지? 맞으면 (같이 지울 삭제된 댓글 있는지?)
+										if(cheerMsglist.get(i-pDapth).getCHR_MSG() == null){
+											
+											// if depth가 내 depth -1인가  맞으면 (근데 그게 내 부모댓글 인지?)
+											if(cheerMsglist.get(i-pDapth).getDEPTH() == cheerMsgVO.getDEPTH()-pDapth){
+												// chr_no 저장
+												//System.out.println("dsfsdfsdf : "+cheerMsglist.get(i-pDapth).getCHR_NO());
+												%>
+												<input type="hidden" name="pCHR_NO" value="<%=cheerMsglist.get(i-pDapth).getCHR_NO() %>" />
+												<%
+											}else{// else  : 돌필요 없음
+												// for문 끝냄
+												break Loop1;
+											}	
+										}
+										else{ // else : 돌필요 없음
 											// for문 끝냄
-									// else : 돌필요 없음
-										// for문 끝냄
-										
-										
-										
-									%>	
-									
-
-										 
-									<%// }%>
-									
-									
-									
-									
+											break;
+										}
+									 }%>
 									
 	
 								</form>
