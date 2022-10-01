@@ -167,12 +167,14 @@ public class CalController extends HttpServlet {
 			cheerMsgAdd(request, calPageMbVO, sessionUserDTO);
 		// 응원메세지 삭제
 		} else if (command != null && command.equals("cheerMsgDel")) {
-			
+		
 
 			// 대댓글이 없는 글이라면 삭제 (다음 댓글의 Depth가 현재 Depth 보다 작거나 같으면)
+			// 하고 위에 부모댓글도 내용이 없으면 삭제
 			if(Integer.parseInt(request.getParameter("nextDepth"))<=Integer.parseInt(request.getParameter("nowDepth")) ) {
 				System.out.println("nextDepth : "+Integer.parseInt(request.getParameter("nextDepth")));
 				cheerMsgDel(request); 
+				
 			// 대댓글이 있다면 내용만 비움(삭제된 메세지입니다로 표시하게됨)
 			}else {
 				System.out.println("nextDepth : "+Integer.parseInt(request.getParameter("nextDepth")));
@@ -239,6 +241,22 @@ public class CalController extends HttpServlet {
 		CheerMsgDAO cheerMsgDAO = new CheerMsgDAO();
         cheerMsgDAO.del(vo);
         System.out.println("cheerMsgdel 성공");
+        
+        
+        /////// 부모댓글도 지울 기능 넣을지 말지 고민되서 따로 넣음
+        if(request.getParameterValues("pCHR_NO")!=null) {
+        	
+            String[] pCHR_NO = request.getParameterValues("pCHR_NO");
+
+    		for(String CHR_NO : pCHR_NO) {
+    			System.out.println("삭제할 부모 CHR_NO : "+CHR_NO);
+    			vo.setCHR_NO(Integer.parseInt(CHR_NO));
+    			
+    			cheerMsgDAO.del(vo);
+    		}
+        	
+        }
+        ///////////////////////////////////////////////////////////
 	}
 	
 	
