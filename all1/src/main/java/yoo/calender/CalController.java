@@ -125,16 +125,25 @@ public class CalController extends HttpServlet {
 	// 주소에서 id 가져옴
 	public String findId(HttpServletRequest request) {
 		String urL = request.getServletPath();	// /cal
-		String url = request.getRequestURI();	// /yoo_all/cal/sdfgaksjd
+		String urI = request.getRequestURI();	// /all/cal/qwer
+
+//		String id = urI.substring(urI.indexOf(urL)+urL.length()+1,urI.length());
+
+		int starIdx = urI.lastIndexOf("/");
+		int endIdx = urI.length();
 		
-		// 문자열 자르기 참고 : https://codechacha.com/ko/java-substring-or-split/
-		// /yoo_all/cal/sdfgaksjd 을 자른다. (/yoo_all/cal/sdfgaksjd 에서  /cal 여기 글자 위치 + /cal 글자 길이,(부터) /yoo_all/cal/sdfgaksjd  길이 까지 ) =   /sdfgaksjd (슬래쉬 떔에 +1)
-		String id = url.substring(url.indexOf(urL)+urL.length()+1,url.length());
+		// if ?가 있으면 ?로 자른다
+		if(urI.lastIndexOf("?") != -1) {
+			endIdx = urI.lastIndexOf("?");
+		}
+		String id = urI.substring(starIdx+1, endIdx);
 		
-//		System.out.println(urL);
-//		System.out.println(url);
-//		System.out.println(url.indexOf(urL));
-//		System.out.println(url.length());
+		
+//		System.out.println("urL : "+urL);
+//		System.out.println("urI : "+urI);
+//		System.out.println(urI.indexOf(urL));
+//		System.out.println(urI.length());
+
 		System.out.println("주소에서 id 가져온 id: "+id);
 
 		return id;

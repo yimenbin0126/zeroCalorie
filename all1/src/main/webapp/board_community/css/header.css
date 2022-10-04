@@ -51,6 +51,7 @@ body{
 
 /*캘린더~운동 묶음*/
 #j_list {
+	cursor: pointer;
     font-size: 15px;
     margin-top: 30px;
     padding: 0px;

@@ -98,7 +98,7 @@ request.setCharacterEncoding("UTF-8");
 			<div id="j_box">
 
 				<div id="e_box">
-					<h1 style="text-align: center">글쓰기</h1>
+					<h1 class="head_text">글쓰기</h1>
 					<form name="articleForm" method="post"
 						action="${contextPath}/community/addArticle.do"
 						enctype="multipart/form-data">
@@ -125,7 +125,7 @@ request.setCharacterEncoding("UTF-8");
 										<div align="right">
 											<div>이미지파일 첨부</div>
 											<div>
-												<input type="file" name="imageFileName"
+												<input type="file"  class="file_btn" name="imageFileName"
 												onchange="readURL(this);" />
 											</div>
 										</div>
@@ -139,9 +139,9 @@ request.setCharacterEncoding("UTF-8");
 
 							<div>
 								<div class="btn">
-									<input type="submit" value="글쓰기" />
+									<input type="submit" class="write_btn" value="글쓰기" />
 									<input type=button
-										value="목록보기" onClick="backToList(this.form)" />
+										value="목록보기" class="list_btn" onClick="backToList(this.form)" />
 								</div>
 							</div>
 						</div>

@@ -128,8 +128,8 @@ request.setCharacterEncoding("UTF-8");
 										<td width="10%">
 										<%=nickname%>
 										</td>
-										<td align='left' width="35%"><span
-											style="padding-right: 30px"></span> <c:choose>
+										<td align="center" width="35%">
+											<c:choose>
 												<c:when test='${article.articleNO > 1 }'>
 													<c:forEach begin="1" end="<%=a_vo.getArticleNO()%>" step="1">
 														<span style="padding-left: 10px"></span>

@@ -8,11 +8,12 @@
 table {
     border-collapse: collapse;
     border: none;
-    border-bottom: 1px solid #273DB2;
+    border-bottom: 1px solid rgb(39,56,104);
+    width:1000px;
 }
 
 #table_header {
-	background-color: #273DB2;
+	background-color: rgb(39,56,104);
 }
 
 #table_header td {
@@ -25,15 +26,20 @@ table {
 	margin-top: 50px;
 	display: flex;
 	justify-content: center;
+	height:40px;
 }
 
 .btn_class a {
 	text-align: center;
-	font-weight: bold;
-	font-size: 20px;
+	/* font-weight: bold; */
+	font-size: 15px;
 	width: 90px;
-	padding: 20px 40px 20px 40px;
+	padding: 10px 0px 10px 0px; 
 	border: none;
 	color: white;
-	background-color: #273DB2;
+	background-color: rgb(39,56,104);
+}
+
+.cls1 {
+	color:rgb(39,56,104);
 }

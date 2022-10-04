@@ -148,7 +148,7 @@
 
 			  <form name="frmArticle" method="post" action="${contextPath}" enctype="multipart/form-data">
 			  <h1 class="first_h1">글 작성</h1>
-			  <table border=0 align="center">
+			  <table class="write_box">
 			   <%
 			   		ArticleVO a_vo = new ArticleVO();
 			   		a_vo = (ArticleVO)request.getAttribute("article");
