@@ -74,7 +74,7 @@ public class memberDAO {
 				vo.setId(id);
 				vo.setName(name);
 				vo.setNickname(nickname);
-				System.out.println(vo.toString());
+				//System.out.println(vo.toString());
 				list.add(vo);
 			}
 			rs.close();
