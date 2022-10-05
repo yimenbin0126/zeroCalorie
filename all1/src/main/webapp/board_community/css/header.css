@@ -14,6 +14,7 @@ body{
 
 /*캘린더~회원가입 묶음*/
 #j_hi {
+	cursor: pointer;
     margin-left: 30px;
     margin-top: 5px;
     display: flex;
@@ -51,7 +52,6 @@ body{
 
 /*캘린더~운동 묶음*/
 #j_list {
-	cursor: pointer;
     font-size: 15px;
     margin-top: 30px;
     padding: 0px;
