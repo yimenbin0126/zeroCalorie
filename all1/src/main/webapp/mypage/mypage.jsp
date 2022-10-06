@@ -105,16 +105,12 @@
 				WEIGHT_DATE[j] = data[i].WEIGHT_DATE;
 
 			// (입력)직전 목표 표시 부분
-			document.querySelector("#yoo_TARGET_WEIGHT_input").setAttribute("placeholder", "직전 목표 "+ TARGET_WEIGHT[j]);
-			// 값 임시저장
-			document.querySelector("#TARGET_WEIGHT2").setAttribute("value", TARGET_WEIGHT[j]);
+			document.querySelector("#yoo_TARGET_WEIGHT_input").setAttribute("value", TARGET_WEIGHT[j]);
 			
 			// (수정)직전 목표 표시 부분
-			document.querySelector("#yoo_CURRENT_WEIGHT_input_mod").setAttribute("placeholder",CURRENT_WEIGHT[j]);
-			document.querySelector("#yoo_TARGET_WEIGHT_input_mod").setAttribute("placeholder",TARGET_WEIGHT[j]);
-			// 값 임시저장
-			document.querySelector("#yoo_CURRENT_WEIGHT_input_mod2").setAttribute("value", CURRENT_WEIGHT[j]);
-			document.querySelector("#yoo_TARGET_WEIGHT_input_mod2").setAttribute("value", TARGET_WEIGHT[j]);
+			document.querySelector("#yoo_CURRENT_WEIGHT_input_mod").setAttribute("value",CURRENT_WEIGHT[j]);
+			document.querySelector("#yoo_TARGET_WEIGHT_input_mod").setAttribute("value",TARGET_WEIGHT[j]);
+
 			
 			// ajax에서 가져온 값중에 오늘 날짜의 값이 있으면 입력창이 수정창으로 바뀜
 			if(WEIGHT_DATE[j]==dateInfo){
@@ -176,38 +172,62 @@
 	}
 	// 몸무게 입력 클릭했을때
 	function click_add_weight(){
-		if(document.querySelector("#yoo_CURRENT_WEIGHT_input").value==""){
-			alert(' 현재 몸무게 값은 필수입니다. ');
-		}else{
-			
-			if(document.querySelector("#yoo_TARGET_WEIGHT_input").value ==""){
-
-				document.querySelector("#yoo_TARGET_WEIGHT_input").setAttribute("value",document.querySelector("#TARGET_WEIGHT2").value);
-			}
-
-			
-			document.add_weight.method = "post";
-			document.add_weight.action = "../mypage";
-			document.add_weight.submit(); 
-			
-		}
 		
+		// 오늘의 몸무게
+		let current_weight = document.querySelector("#yoo_CURRENT_WEIGHT_input").value;
+		
+		// 목표 몸무게
+		let target_weight = document.querySelector("#yoo_TARGET_WEIGHT_input").value;
+		
+		// 정규식 숫자만 
+		let numbers = /^[0-9]*$/;	
+		
+		if( ((! numbers.test(current_weight)) ||  (! numbers.test(target_weight))) ){
+			alert('숫자만 입력해 주세요');
 			
+		// 오늘의 몸무게, 또는 목표 몸무게가 빈칸이면		
+		}else if((current_weight=="") ||(target_weight=="")){
+			alert('숫자를 입력해 주세요');
+			
+		}else{
+
+	 		document.add_weight.method = "post";
+			document.add_weight.action = "../mypage";
+			document.add_weight.submit(); 	 
+		}	
 	}
+	
+	
 	// 몸무게 수정 클릭했을때
 	function click_mod_weight(){
-		if(document.querySelector("#yoo_CURRENT_WEIGHT_input_mod").value==""){
-			document.querySelector("#yoo_CURRENT_WEIGHT_input_mod").setAttribute("value",document.querySelector("#yoo_CURRENT_WEIGHT_input_mod2").value);
-		}
-		if(document.querySelector("#yoo_TARGET_WEIGHT_input_mod").value ==""){
-			document.querySelector("#yoo_TARGET_WEIGHT_input_mod").setAttribute("value",document.querySelector("#yoo_TARGET_WEIGHT_input_mod2").value);
-		}
-
-			document.mod_weight.method = "post";
-			document.mod_weight.action = "../mypage";
-			document.mod_weight.submit(); 
+		
+		
+		// 오늘의 몸무게
+		let current_weight = document.querySelector("#yoo_CURRENT_WEIGHT_input_mod").value;
+		
+		// 목표 몸무게
+		let target_weight = document.querySelector("#yoo_TARGET_WEIGHT_input_mod").value;
+		
+		// 정규식 숫자만 
+		let numbers = /^[0-9]*$/;	
+		
+		// 오늘의 몸무게, 또는 목표 몸무게가 숫자가 아닐때 
+		console.log( numbers.test(current_weight));
+		console.log( numbers.test(target_weight));
+		if( ((! numbers.test(current_weight)) ||  (! numbers.test(target_weight))) ){
+			alert('숫자만 입력해 주세요');
 			
-		}
+		// 오늘의 몸무게, 또는 목표 몸무게가 빈칸이면		
+		}else if((current_weight=="") ||(target_weight=="")){
+			alert('숫자를 입력해 주세요');
+			
+		}else{
+
+	 		document.mod_weight.method = "post";
+			document.mod_weight.action = "../mypage";
+			document.mod_weight.submit(); 	 
+		}	
+	}
 		
 
 	function dateInfo_fn() {
@@ -330,23 +350,20 @@
 	            
 				<div id="yoo_weight_input">
 					<form id="add_weight"  name ="add_weight">
-						오늘의 몸무게 : <input id="yoo_CURRENT_WEIGHT_input" name="CURRENT_WEIGHT" type="text" placeholder="몸무게를 입력해주세요">
+						오늘의 몸무게 : <input id="yoo_CURRENT_WEIGHT_input" name="CURRENT_WEIGHT" type="text" >
 						kg, 
-						목표 몸무게: <input id="yoo_TARGET_WEIGHT_input" name="TARGET_WEIGHT" type="text" placeholder="목표 몸무게를 입력해주세요"> kg 
+						목표 몸무게: <input id="yoo_TARGET_WEIGHT_input" name="TARGET_WEIGHT" type="text" > kg 
 						<input id="yoo_cur_btn" type="button" value="입력" onclick="click_add_weight()">
 						<input type="hidden" name="command" value="weightAdd" />
-						<input type="hidden" name="TARGET_WEIGHT2" id="TARGET_WEIGHT2" />
 					</form>
 					
 					<form id="mod_weight" name ="mod_weight">
-						오늘의 몸무게 : <input id="yoo_CURRENT_WEIGHT_input_mod" name="CURRENT_WEIGHT" type="text" placeholder="몸무게를 입력해주세요">
+						오늘의 몸무게 : <input id="yoo_CURRENT_WEIGHT_input_mod" name="CURRENT_WEIGHT" type="text" >
 						kg, 
-						목표 몸무게: <input id="yoo_TARGET_WEIGHT_input_mod" name="TARGET_WEIGHT" type="text" placeholder="목표 몸무게를 입력해주세요"> kg 
+						목표 몸무게: <input id="yoo_TARGET_WEIGHT_input_mod" name="TARGET_WEIGHT" type="text" > kg 
 						<input id="yoo_cur_btn" type="button" value="수정" onclick="click_mod_weight()">
 						<br><span id=mod_msg>오늘은 이미 몸무게를 입력 하셨습니다. 수정만 가능합니다.</span>
 						<input type="hidden" name="command" value="weightMod" />
-						<input type="hidden"  id="yoo_CURRENT_WEIGHT_input_mod2" />
-						<input type="hidden"  id="yoo_TARGET_WEIGHT_input_mod2" />
 					</form>
 				</div>
 				
