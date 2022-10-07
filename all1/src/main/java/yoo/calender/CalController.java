@@ -87,33 +87,15 @@ public class CalController extends HttpServlet {
 		// >>>>todolist 조회 
 		List<TodoListVO> todoListlist = TodoListRead(request, calPageMbVO, pageDateInfo);
 		
+		// >>>> 회원 조회  
+		List<memberVO> serchMemberlist = searchUser(request);
 		
-		//동현씨 부분// 
-		// 멤버 객체 생성
-		memberDAO dao = new memberDAO();
-		memberVO vo = new memberVO();
-		List<memberVO> serchMemberlist = new ArrayList<memberVO>();;
-			if(request.getParameter("serchID")!=null) {
-				String serchID = request.getParameter("serchID");
-				vo = dao.searchmember(serchID);
-				serchMemberlist.add(vo);
-			}else {
-				
-				serchMemberlist = dao.searchmembers();
-			}
-			System.out.println("serchMemberlist : "+serchMemberlist.size());
-			
-		////////////////
-		
-
 		// JSP 페이지로 값들 전달
 		transCalView(request, response, mypage, calPageMbVO, cheerMsglist, 
 								todoListlist, pageDateInfo, calTodolist, serchMemberlist );
 	}
 	
 	public void sendLoginPage(HttpServletResponse response) {
-		
-		
 		
 		try {
 			response.sendRedirect("/all/calender/sendLoginPage.jsp");
@@ -360,6 +342,26 @@ public class CalController extends HttpServlet {
 		TodoListDAO1.mod(vo);
 	}
 	
+	// 친구 검색
+	public List<memberVO> searchUser(HttpServletRequest request) {
+
+		memberDAO dao = new memberDAO();
+		memberVO vo = new memberVO();
+		List<memberVO> serchMemberlist = new ArrayList<memberVO>();
+		
+			// 입력된 id 값이 있을시 검색
+			if(request.getParameter("serchID")!=null && request.getParameter("serchID").trim().length() != 0 ) {
+				String serchID = request.getParameter("serchID");
+				vo = dao.searchmember(serchID);
+				serchMemberlist.add(vo);
+				
+				return serchMemberlist;
+			// 입력된 id 값이 없을시 검색
+			}else {
+				return serchMemberlist = dao.searchmembers();
+			}
+	}
+	
 	// JSP(뷰)에서 가져온 pageYear, pageMonth 있는지확인 후 있으면 해당날짜 돌려주고, 없으면 오늘날짜 세팅
 	public Map setPageDate(HttpServletRequest request) {
 		Map<String, Integer> pageDateInfo = new HashMap<String, Integer>();
@@ -405,10 +407,8 @@ public class CalController extends HttpServlet {
 		try {
 			dispatcher.forward(request, response);
 		} catch (ServletException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		

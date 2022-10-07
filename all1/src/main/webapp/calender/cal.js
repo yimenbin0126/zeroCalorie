@@ -170,8 +170,10 @@ function click_rpl_chr_btn(){
 	});
 }
 
-// 응원메세지 입력 버튼 눌렀을 때 내용 빈것 거름
+// 응원메세지 입력 버튼 눌렀을 때 input text 관리 
 function click_CheerMsgAdd(form){
+	// VARCHAR2(1000) 라서 편의상 한글로 계산 300자 제한
+	let Max_length = 300; 
 	
 /*	// 입력창의 내용이 비었으면 경고 메세지
 	if(document.querySelector("#yoo_chr_input").value ==""){
@@ -182,13 +184,66 @@ function click_CheerMsgAdd(form){
 		return true;
 	}	*/
 	
-		// 입력창의 내용이 비었으면 경고 메세지
+	// 입력창의 내용이 비었으면 경고 메세지
 	if(form.CHR_MSG.value ==""){
 		 alert(' 응원 메세지 내용을 입력해주세요');
 		 return false;
+	}
+	// 글자수 제한해서 받기 (Max_length)
+	else if(form.CHR_MSG.value.length > Max_length){
+		alert(' 300자 이하로 적어주세요');
+		 return false;
+	
 	// 그렇지 않을경우 입력 전달
 	}else{
 		return true;
 	}	
 }
 
+// todolist 등록, 수정시 input text 관리 
+function tdl_contents_form(form){
+	// VARCHAR2(1000) 라서 편의상 한글로 계산 300자 제한
+	let Max_length = 300; 
+	
+	
+	// 입력창의 내용이 비었으면 경고 메세지
+	if(form.tdl_contents.value ==""){
+		 alert(' todolist 내용을 입력해주세요');
+		 return false;
+	}
+	// 글자수 제한해서 받기 (Max_length)
+	else if(form.tdl_contents.value.length > Max_length){
+		alert(' 300자 이하로 적어주세요');
+		 return false;
+	
+	// 그렇지 않을경우 입력 전달
+	}else{
+		return true;
+	}	
+}
+
+
+function find_form(form){
+	// id 최대글자수가 9라서
+	let Max_length = 9; 
+	
+	// id 검색시 영문소문자와 숫자만 받았었음
+	let pattern = /^[0-9a-z]*$/;	
+	
+	
+	// 입력창의 내용이 비었으면 경고 메세지
+	if(! pattern.test(form.yoo_find_input.value)){
+		 alert(' 숫자 또는 영문소문자만 입력해 주세요 ');
+		 return false;
+		 
+	}
+	// 글자수 제한해서 받기 (Max_length)
+	else if(form.yoo_find_input.value.length > Max_length){
+		alert(Max_length+'자 이하로 적어주세요');
+		 return false;
+	
+	// 그렇지 않을경우 입력 전달
+	}else{
+		return true;
+	}	
+}

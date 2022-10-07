@@ -68,7 +68,7 @@ boolean mypage= (boolean)request.getAttribute("mypage");
 	click_rpl_chr_btn();
 	
 	// 응원메세지 댓글 입력 버튼 눌렀을 때
-	click_cheerMsgRplAdd();
+	//click_cheerMsgRplAdd();
 }
 
 // 이전달 버튼 눌렸을 때 
@@ -329,11 +329,10 @@ function yoo_addDataCal() {
 				
 				
 				
-				<!-- 친구찾기 div -->
+				<!-- id로 친구 검색 div -->
 				<div id="yoo_find_obj">
 					<div id="yoo_find_input_btn"> 
-						<!-- 멤버 전체 조회 (동현씨 부분)-->
-						<form name="member" method="post" action="" id="yoo_find_input_btn_frm">
+						<form name="member" method="post" action="" id="yoo_find_input_btn_frm"  onSubmit="return find_form(this)">
 							<input id="yoo_find_input" type="text" placeholder="Id를 입력하세요"name="serchID"><input id="yoo_find_btn" type="submit" value="입력" > 
 	               			<input type="hidden" name="pageYear" value="<%=year%>"/> 
 							<input type="hidden" name="pageMonth" value="<%=month%>" /> 
@@ -342,8 +341,7 @@ function yoo_addDataCal() {
 	                </div>
 	                
 	                
-	                <!-- 멤버 전체 조회 (동현씨 부분)-->
-	               
+	                <!-- 친구 검색 view -->
 	            	<div id="yoo_find_view">
 	            		<% 
 	                	List<memberVO> serchMemberlist = (ArrayList<memberVO>)new ArrayList();
@@ -351,13 +349,17 @@ function yoo_addDataCal() {
 								serchMemberlist = (ArrayList<memberVO>)request.getAttribute("serchMemberlist");
 									for(int i=0; i<serchMemberlist.size(); i++){
 										memberVO vo = new memberVO();
-											vo = serchMemberlist.get(i);
+										vo = serchMemberlist.get(i);
 						%>
-	            		<p><a href='<%=vo.getId() %>' style="color: gray; text-decoration: none;"> 
-                           <%=vo.getNickname() %></a>(<%=vo.getId() %>)</p>
-	            		<%
+						
+									<%if(vo.getId() ==null) {%>
+										<p> 검색한 회원이 없습니다.</p>
+									<% }else{%>
+					            		<p><a href='<%=vo.getId() %>' style="color: gray; text-decoration: none;"> 
+				                           <%=vo.getNickname() %></a>(<%=vo.getId() %>)</p>
+				        <%				}
 									}
-							}
+								}
 						%>
 	            	</div> 
 				</div>	
@@ -474,7 +476,7 @@ function yoo_addDataCal() {
 				    			</form>	
 						
 								<!-- 운동 todolist 수정 form -->
-						    	<form  action="" method="post" class= "tdl_mod_form">
+						    	<form  action="" method="post" class= "tdl_mod_form" onSubmit="return tdl_contents_form(this)">
 						    		<input type="hidden" name="tdl_no" value="${todoListlist[i2].tdl_no }"/>
 						    		<input type="hidden" name="command" value="tdl_contentsMod"/>
 						    		<input type="hidden" name="tdl_category" value="운동"/>
@@ -500,8 +502,8 @@ function yoo_addDataCal() {
 				
 				<!-- 내 페이지라면 todolist 등록 버튼 보이게 -->
 				<% if(mypage){ %>
-				<form  action="" method="post" >	
-				    <input type="text" id="j_msg1" name="tdl_contents" onkeypress="" >
+				<form  action="" method="post" onSubmit="return tdl_contents_form(this)">	
+				    <input type="text" id="j_msg1" name="tdl_contents"  >
 				    <input type="submit" id="j_app1" value="등록">
 				    <input type="hidden" name="command" value="tdl_contentsAdd"/>
 				    <input type="hidden" name="tdl_category" value="운동"/>
@@ -546,7 +548,7 @@ function yoo_addDataCal() {
 				    			</form>	
 						
 								<!-- 식단 todolist 수정 form -->
-						    	<form  action="" method="post" class= "tdl_mod_form">
+						    	<form  action="" method="post" class= "tdl_mod_form" onSubmit="return tdl_contents_form(this)">
 						    		<input type="hidden" name="tdl_no" value="${todoListlist[i2].tdl_no }"/>
 						    		<input type="hidden" name="command" value="tdl_contentsMod"/>
 						    		<input type="hidden" name="tdl_category" value="식단"/>
@@ -573,8 +575,8 @@ function yoo_addDataCal() {
 	   			<!-- 내 페이지라면 todolist 등록 버튼 보이게 -->
 				<% if(mypage){ %>
 				<!-- todolist 식단 등록 -->
-				<form  action="" method="post" >	
-				    <input type="text" id="j_msg1" name="tdl_contents" onkeypress="" >
+				<form  action="" method="post" onSubmit="return tdl_contents_form(this)">	
+				    <input type="text" id="j_msg1" name="tdl_contents" >
 				    <input type="submit" id="j_app1" value="등록">
 				    <input type="hidden" name="command" value="tdl_contentsAdd"/>
 				    <input type="hidden" name="tdl_category" value="식단"/>
