@@ -270,10 +270,13 @@
 		</ul>
 
 		<div id=j_nav>
-			<input type='button' class="j_btn2 j_btn"
-				onclick="location.href='/all/mypage'" value="마이페이지"> <input
-				type='button' class="j_btn3 j_btn" onclick="location.href='/all/logout'"
+		<div style="color: white; font-size: 13px;">
+        		<%=m_dto.getNickname()%>님 환영합니다.
+        	</div>
+		<input type='button' class="j_btn3 j_btn" onclick="location.href='/all/logout'"
 				value="로그아웃">
+		<input type='button' class="j_btn2 j_btn"
+				onclick="location.href='/all/mypage'" value="마이페이지"> 
 		</div>
 	</div>
 	<!-- 헤더 끝 -->
@@ -350,17 +353,17 @@
 	            
 				<div id="yoo_weight_input">
 					<form id="add_weight"  name ="add_weight">
-						오늘의 몸무게 : <input id="yoo_CURRENT_WEIGHT_input" name="CURRENT_WEIGHT" type="text" >
+						오늘의 몸무게 : <input id="yoo_CURRENT_WEIGHT_input" name="CURRENT_WEIGHT" type="text" maxlength="5">
 						kg, 
-						목표 몸무게: <input id="yoo_TARGET_WEIGHT_input" name="TARGET_WEIGHT" type="text" > kg 
+						목표 몸무게: <input id="yoo_TARGET_WEIGHT_input" name="TARGET_WEIGHT" type="text" maxlength="5"> kg 
 						<input id="yoo_cur_btn" type="button" value="입력" onclick="click_add_weight()">
 						<input type="hidden" name="command" value="weightAdd" />
 					</form>
 					
 					<form id="mod_weight" name ="mod_weight">
-						오늘의 몸무게 : <input id="yoo_CURRENT_WEIGHT_input_mod" name="CURRENT_WEIGHT" type="text" >
+						오늘의 몸무게 : <input id="yoo_CURRENT_WEIGHT_input_mod" name="CURRENT_WEIGHT" type="text" maxlength="5">
 						kg, 
-						목표 몸무게: <input id="yoo_TARGET_WEIGHT_input_mod" name="TARGET_WEIGHT" type="text" > kg 
+						목표 몸무게: <input id="yoo_TARGET_WEIGHT_input_mod" name="TARGET_WEIGHT" type="text" maxlength="5"> kg 
 						<input id="yoo_cur_btn" type="button" value="수정" onclick="click_mod_weight()">
 						<br><span id=mod_msg>오늘은 이미 몸무게를 입력 하셨습니다. 수정만 가능합니다.</span>
 						<input type="hidden" name="command" value="weightMod" />

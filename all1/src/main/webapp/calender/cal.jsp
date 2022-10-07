@@ -185,10 +185,13 @@ function yoo_addDataCal() {
 		</ul>
 
 		<div id=j_nav>
-			<input type='button' class="j_btn2 j_btn" 
-						onclick="location.href='/all/mypage'" value="마이페이지">
+			<div style="color: white; font-size: 13px;">
+        		<%=sessionUser.getNickname()%>님 환영합니다.
+        	</div>
 			<input type='button' class="j_btn3 j_btn"
 					onclick="location.href='/all/logout'"  value="로그아웃">
+			<input type='button' class="j_btn2 j_btn" 
+						onclick="location.href='/all/mypage'" value="마이페이지">
 		</div>
 	</div>
 
@@ -216,7 +219,7 @@ function yoo_addDataCal() {
 					<!-- 응원메세지 입력창과 버튼 -->
 					<form name="cheerMsgAdd_frm" action="" enctype="utf-8" method="post" onSubmit="return click_CheerMsgAdd(this)">
 						<div id="yoo_chr_input_btn">
-							<input id="yoo_chr_input" name="CHR_MSG" type="text" placeholder="응원메세지 남기기!"><input id="yoo_chr_btn" type="submit" value="입력" >
+							<input id="yoo_chr_input" name="CHR_MSG" type="text" placeholder="응원메세지 남기기! 300자까지 입력 가능합니다!! " maxlength="300"><input id="yoo_chr_btn" type="submit" value="입력" >
 							<input type="hidden" name="command" value="cheerMsgAdd" />
 							<input type="hidden" name="CHR_PARENTS_NO" value="0" />
 						</div>
