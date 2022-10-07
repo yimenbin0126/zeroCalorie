@@ -48,28 +48,35 @@ public class MemberController extends HttpServlet {
 			// 소연 부분
 		}else if ((command != null && command.equals("weightAdd"))) {
 			
-			MemberDTO_e sessionUserDTO = new MemberDTO_e();	// 접속자 정보
-			sessionUserDTO = (MemberDTO_e)request.getSession().getAttribute("user");
+			// jsp에서 넘어온 CURRENT_WEIGHT, TARGET_WEIGHT 등이 int 변환에 문제가 생길수 있어서..
+			try {
+
+				MemberDTO_e sessionUserDTO = new MemberDTO_e();	// 접속자 정보
+				sessionUserDTO = (MemberDTO_e)request.getSession().getAttribute("user");
+				
+				Yoo_MypageDAO yooDAO = new Yoo_MypageDAO();
+				Yoo_MypageVO yooVO = new Yoo_MypageVO();
+				yooVO.setCURRENT_WEIGHT(Integer.parseInt(request.getParameter("CURRENT_WEIGHT")));
+				yooVO.setTARGET_WEIGHT(Integer.parseInt(request.getParameter("TARGET_WEIGHT")));
+				yooVO.setMEMBER_NO(sessionUserDTO.getMember_no());
+				yooDAO.add(yooVO);
+				
+			} catch (Exception e) {e.printStackTrace();}
 			
-			Yoo_MypageDAO yooDAO = new Yoo_MypageDAO();
-			Yoo_MypageVO yooVO = new Yoo_MypageVO();
-			yooVO.setCURRENT_WEIGHT(Integer.parseInt(request.getParameter("CURRENT_WEIGHT")));
-			yooVO.setTARGET_WEIGHT(Integer.parseInt(request.getParameter("TARGET_WEIGHT")));
-			yooVO.setMEMBER_NO(sessionUserDTO.getMember_no());
-			yooDAO.add(yooVO);
 		}else if ((command != null && command.equals("weightMod"))) {
 			 
-			MemberDTO_e sessionUserDTO = new MemberDTO_e();	// 접속자 정보
-			sessionUserDTO = (MemberDTO_e)request.getSession().getAttribute("user");
-			System.out.println("mod 다녀왓다");
-			Yoo_MypageDAO yooDAO = new Yoo_MypageDAO();
-			Yoo_MypageVO yooVO = new Yoo_MypageVO();
-			yooVO.setCURRENT_WEIGHT(Integer.parseInt(request.getParameter("CURRENT_WEIGHT")));
-			yooVO.setTARGET_WEIGHT(Integer.parseInt(request.getParameter("TARGET_WEIGHT")));
-			yooVO.setMEMBER_NO(sessionUserDTO.getMember_no());
-			
-	
-			yooDAO.mod(yooVO);
+			// jsp에서 넘어온 CURRENT_WEIGHT, TARGET_WEIGHT 등이 int 변환에 문제가 생길수 있어서..
+			try {
+				MemberDTO_e sessionUserDTO = new MemberDTO_e();	// 접속자 정보
+				sessionUserDTO = (MemberDTO_e)request.getSession().getAttribute("user");
+				
+				Yoo_MypageDAO yooDAO = new Yoo_MypageDAO();
+				Yoo_MypageVO yooVO = new Yoo_MypageVO();
+				yooVO.setCURRENT_WEIGHT(Integer.parseInt(request.getParameter("CURRENT_WEIGHT")));
+				yooVO.setTARGET_WEIGHT(Integer.parseInt(request.getParameter("TARGET_WEIGHT")));
+				yooVO.setMEMBER_NO(sessionUserDTO.getMember_no());
+				yooDAO.mod(yooVO);
+			} catch (Exception e) {e.printStackTrace();}
 		}
 		
 		response.sendRedirect("/all/mypage/mypage.jsp");
