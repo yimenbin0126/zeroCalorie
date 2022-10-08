@@ -317,7 +317,7 @@ function yoo_addDataCal() {
 							<br>
 							<!-- 응원 메세지 댓글 입력 -->
 							<form class="chr_rpl_form" name="chr_rpl_form"  action="" enctype="utf-8" method="post" onSubmit="return click_CheerMsgAdd(this)" >
-								ㄴ><input type="text" class="chl_rpl_input" name="CHR_MSG">
+								ㄴ><input type="text" class="chl_rpl_input" name="CHR_MSG" maxlength="300">
 								<input class='rpl_chr_btn ' type='submit' value='댓글입력' >
 								<input type="hidden" name="command" value="cheerMsgAdd" />
 								<input type="hidden" name="CHR_PARENTS_NO" value="<%=cheerMsgVO.getCHR_NO() %>" />
@@ -333,7 +333,7 @@ function yoo_addDataCal() {
 				<div id="yoo_find_obj">
 					<div id="yoo_find_input_btn"> 
 						<form name="member" method="post" action="" id="yoo_find_input_btn_frm"  onSubmit="return find_form(this)">
-							<input id="yoo_find_input" type="text" placeholder="Id를 입력하세요"name="serchID"><input id="yoo_find_btn" type="submit" value="입력" > 
+							<input id="yoo_find_input" type="text" placeholder="Id를 입력하세요"name="serchID" maxlength="9"><input id="yoo_find_btn" type="submit" value="입력" > 
 	               			<input type="hidden" name="pageYear" value="<%=year%>"/> 
 							<input type="hidden" name="pageMonth" value="<%=month%>" /> 
 							<input type="hidden" name="pageDate" value="<%=date%>" /> 
@@ -486,7 +486,7 @@ function yoo_addDataCal() {
 									
 						    		<!-- 수정하기 버튼 -->
 						    		<button type="button" class="button_mod mod_hidden"><img src="/all/calender/img/edit_icon.png" class="mod_icon"></button>
-						    		<input type="text" class="contents_hide contents_hide_text" name="tdl_contents" value="${todoListlist[i2].tdl_contents }"/>
+						    		<input type="text" class="contents_hide contents_hide_text" name="tdl_contents" value="${todoListlist[i2].tdl_contents }" maxlength="300"/>
                    					<!-- 수정 등록 버튼 -->
                    					<button type="submit" class="contents_hide contents_hide_btn"><img src="/all/calender/img/check_icon.png" class="modCheck_icon"></button>
 						    		<!-- 수정 취소 버튼 -->
@@ -503,7 +503,7 @@ function yoo_addDataCal() {
 				<!-- 내 페이지라면 todolist 등록 버튼 보이게 -->
 				<% if(mypage){ %>
 				<form  action="" method="post" onSubmit="return tdl_contents_form(this)">	
-				    <input type="text" id="j_msg1" name="tdl_contents"  >
+				    <input type="text" id="j_msg1" name="tdl_contents" maxlength="300">
 				    <input type="submit" id="j_app1" value="등록">
 				    <input type="hidden" name="command" value="tdl_contentsAdd"/>
 				    <input type="hidden" name="tdl_category" value="운동"/>
@@ -558,7 +558,7 @@ function yoo_addDataCal() {
 									
 									<!-- 수정하기 버튼  -->
 						    		<button type="button" class="button_mod mod_hidden"><img src="/all/calender/img/edit_icon.png" class="mod_icon"></button>
-						    		<input type="text" class="contents_hide contents_hide_text" name="tdl_contents" value="${todoListlist[i2].tdl_contents }"/>
+						    		<input type="text" class="contents_hide contents_hide_text" name="tdl_contents" value="${todoListlist[i2].tdl_contents }" maxlength="300"/>
                    					<!-- 수정 등록 버튼 -->
                    					<button type="submit" class="contents_hide contents_hide_btn"><img src="/all/calender/img/check_icon.png" class="modCheck_icon"></button>
 						    		<!-- 수정 취소 버튼 -->
@@ -576,7 +576,7 @@ function yoo_addDataCal() {
 				<% if(mypage){ %>
 				<!-- todolist 식단 등록 -->
 				<form  action="" method="post" onSubmit="return tdl_contents_form(this)">	
-				    <input type="text" id="j_msg1" name="tdl_contents" >
+				    <input type="text" id="j_msg1" name="tdl_contents" maxlength="300">
 				    <input type="submit" id="j_app1" value="등록">
 				    <input type="hidden" name="command" value="tdl_contentsAdd"/>
 				    <input type="hidden" name="tdl_category" value="식단"/>

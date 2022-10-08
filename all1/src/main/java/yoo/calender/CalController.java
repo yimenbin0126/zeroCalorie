@@ -52,7 +52,6 @@ public class CalController extends HttpServlet {
 		sessionUserDTO = (MemberDTO_e)request.getSession().getAttribute("user");
 		 
 		// 세션 정보가 없으면 (로긴 안했으면)
-		System.out.println(sessionUserDTO);
 		if(sessionUserDTO==null) {
 			sendLoginPage(response);
 			return;
@@ -156,6 +155,7 @@ public class CalController extends HttpServlet {
 		// 응원메세지 추가
 		if (command != null && command.equals("cheerMsgAdd")) {
 			cheerMsgAdd(request, calPageMbVO, sessionUserDTO);
+			
 		// 응원메세지 삭제
 		} else if (command != null && command.equals("cheerMsgDel")) {
 		
@@ -203,51 +203,58 @@ public class CalController extends HttpServlet {
 	
 	// 응원 msg db에 추가
 	public void cheerMsgAdd(HttpServletRequest request, CalPageMbVO calPageMbVO, MemberDTO_e sessionUserDTO ) {
-		System.out.println("cheerMsgAdd 요청");
-		CheerMsgVO vo = new CheerMsgVO();
-		vo.setCHR_MSG(request.getParameter("CHR_MSG"));
-		vo.setFR_MEMBER_NO(sessionUserDTO.getMember_no());
-        vo.setTO_MEMBER_NO(calPageMbVO.getMEMBER_NO());
-        vo.setCHR_PARENTS_NO(Integer.parseInt(request.getParameter("CHR_PARENTS_NO")));
-        System.out.println(request.getParameter("CHR_MSG"));
-        CheerMsgDAO cheerMsgDAO = new CheerMsgDAO();
-        cheerMsgDAO.add(vo);
-        System.out.println("cheerMsgAdd 성공");
+		try {
+			System.out.println("cheerMsgAdd 요청");
+			CheerMsgVO vo = new CheerMsgVO();
+			vo.setCHR_MSG(request.getParameter("CHR_MSG"));
+			vo.setFR_MEMBER_NO(sessionUserDTO.getMember_no());
+	        vo.setTO_MEMBER_NO(calPageMbVO.getMEMBER_NO());
+	        vo.setCHR_PARENTS_NO(Integer.parseInt(request.getParameter("CHR_PARENTS_NO")));
+	        System.out.println(request.getParameter("CHR_MSG"));
+	        CheerMsgDAO cheerMsgDAO = new CheerMsgDAO();
+	        cheerMsgDAO.add(vo);
+	        System.out.println("cheerMsgAdd 성공");
+		}catch(Exception e) {e.printStackTrace();}
 	}
 	
 	// 응원 msg db에서 메세지만 비움
 	public void cheerMsgEmpty(HttpServletRequest request) {
-		System.out.println("cheerMsgEmpty 요청");
-		CheerMsgVO vo = new CheerMsgVO();
-		vo.setCHR_NO(Integer.parseInt(request.getParameter("CHR_NO")));
-		CheerMsgDAO cheerMsgDAO = new CheerMsgDAO();
-        cheerMsgDAO.empty(vo);
-        System.out.println("cheerMsgEmpty 성공");
+		try {
+			System.out.println("cheerMsgEmpty 요청");
+			CheerMsgVO vo = new CheerMsgVO();
+			vo.setCHR_NO(Integer.parseInt(request.getParameter("CHR_NO")));
+			CheerMsgDAO cheerMsgDAO = new CheerMsgDAO();
+	        cheerMsgDAO.empty(vo);
+	        System.out.println("cheerMsgEmpty 성공");
+		}catch(Exception e) {e.printStackTrace();}
 	}
 	// 응원 msg db에서 삭제
 	public void cheerMsgDel(HttpServletRequest request) {
-		System.out.println("cheerMsgdel 요청");
-		CheerMsgVO vo = new CheerMsgVO();
-		vo.setCHR_NO(Integer.parseInt(request.getParameter("CHR_NO")));
-		CheerMsgDAO cheerMsgDAO = new CheerMsgDAO();
-        cheerMsgDAO.del(vo);
-        System.out.println("cheerMsgdel 성공");
+		try {
+			System.out.println("cheerMsgdel 요청");
+			CheerMsgVO vo = new CheerMsgVO();
+			vo.setCHR_NO(Integer.parseInt(request.getParameter("CHR_NO")));
+			CheerMsgDAO cheerMsgDAO = new CheerMsgDAO();
+	        cheerMsgDAO.del(vo);
+	        System.out.println("cheerMsgdel 성공");
+		
         
         
-        /////// 부모댓글도 지울 기능 넣을지 말지 고민되서 따로 넣음
-        if(request.getParameterValues("pCHR_NO")!=null) {
-        	
-            String[] pCHR_NO = request.getParameterValues("pCHR_NO");
-
-    		for(String CHR_NO : pCHR_NO) {
-    			System.out.println("삭제할 부모 CHR_NO : "+CHR_NO);
-    			vo.setCHR_NO(Integer.parseInt(CHR_NO));
-    			
-    			cheerMsgDAO.del(vo);
-    		}
-        	
-        }
-        ///////////////////////////////////////////////////////////
+	        /////// 부모댓글도 지울 기능 넣을지 말지 고민되서 따로 넣음
+	        if(request.getParameterValues("pCHR_NO")!=null) {
+	        	
+	            String[] pCHR_NO = request.getParameterValues("pCHR_NO");
+	
+	    		for(String CHR_NO : pCHR_NO) {
+	    			System.out.println("삭제할 부모 CHR_NO : "+CHR_NO);
+	    			vo.setCHR_NO(Integer.parseInt(CHR_NO));
+	    			
+	    			cheerMsgDAO.del(vo);
+	    		}
+	        	
+	        }
+	        ///////////////////////////////////////////////////////////
+		}catch(Exception e) {e.printStackTrace();}
 	}
 	
 	
@@ -308,20 +315,23 @@ public class CalController extends HttpServlet {
 	
 	// todoList 추가
 	public void todoListAdd(HttpServletRequest request, CalPageMbVO calPageMbVO) {
-		TodoListDAO TodoListDAO1 = new TodoListDAO();
-		TodoListVO vo = new TodoListVO();
-		
-		int pageYear = Integer.parseInt(request.getParameter("pageYear"));
-		int pageMonth =  Integer.parseInt(request.getParameter("pageMonth"))+1;
-		int pageDate = Integer.parseInt(request.getParameter("pageDate"));
-
-		String tdl_date = pageYear+"-"+pageMonth+"-"+pageDate;
-		
-		vo.setTdl_contents( request.getParameter("tdl_contents") );
-		vo.setTdl_category(request.getParameter("tdl_category") );
-		vo.setTdl_date(tdl_date);
-		vo.setMember_no(calPageMbVO.getMEMBER_NO());
-		TodoListDAO1.add(vo);
+		try {
+			TodoListDAO TodoListDAO1 = new TodoListDAO();
+			TodoListVO vo = new TodoListVO();
+			
+			int pageYear = Integer.parseInt(request.getParameter("pageYear"));
+			int pageMonth =  Integer.parseInt(request.getParameter("pageMonth"))+1;
+			int pageDate = Integer.parseInt(request.getParameter("pageDate"));
+	
+			String tdl_date = pageYear+"-"+pageMonth+"-"+pageDate;
+			
+			vo.setTdl_contents( request.getParameter("tdl_contents") );
+			//vo.setTdl_contents( "ㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱ" );
+			vo.setTdl_category(request.getParameter("tdl_category") );
+			vo.setTdl_date(tdl_date);
+			vo.setMember_no(calPageMbVO.getMEMBER_NO());
+			TodoListDAO1.add(vo);
+		}catch(Exception e) {e.printStackTrace();}
 	}
 	
 	// todoList 삭제
