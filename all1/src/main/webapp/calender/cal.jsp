@@ -2,11 +2,34 @@
 	pageEncoding="utf-8" import="java.util.*, yoo.*"
 	import=" eunbin.loginjoin.MemberDAO_e, eunbin.loginjoin.MemberDTO_e,
 	eunbin.service.DAO.ServiceDAO, eunbin.service.DTO.ServiceDTO, yoo.calender.*, donghyeon.* "
-	
-	%>
+%>
+    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-boolean mypage= (boolean)request.getAttribute("mypage");
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<% boolean mypage= (boolean)request.getAttribute("mypage");%>
+
+<%// >> 페이징 
+
+Map chrPagingMap = (Map)request.getAttribute("chrPagingMap");
+
+
+int pageNum  = (int)chrPagingMap.get("pageNum");
+int countPerPage  = (int)chrPagingMap.get("countPerPage"); 
+int count = (int)chrPagingMap.get("count"); 
+int[] countPerPageArr = (int[])chrPagingMap.get("countPerPageArr");
+int lastPage = (int)Math.ceil(((double)count/countPerPageArr[countPerPage])); //올림
+
+String uri = (String)chrPagingMap.get("uri"); 
+
+int section = 5;
+
+int sec_position = (int)Math.ceil(((double)pageNum/section));
+int firstNo = ((sec_position-1) * section+1);
+//if( firstNo<1 ){ firstNo = 1; }
+int lastNo = firstNo +section -1;
+if( lastNo > lastPage ){ lastNo = lastPage; }
 %>
 
 <!DOCTYPE html>
@@ -23,52 +46,55 @@ boolean mypage= (boolean)request.getAttribute("mypage");
 
 <script>
 	window.onload=function(){
-	
-<%Map<String, Integer> pageDateInfo = new HashMap();
 
-	// 날짜 정보 받아옴
-	pageDateInfo = (Map) request.getAttribute("pageDateInfo");
-	
-	int year =(int) pageDateInfo.get("pageYear");
-	int month = (int) pageDateInfo.get("pageMonth");	
-	int date = (int) pageDateInfo.get("pageDate");
-	
-	String pageDate = year +"-"+month+"-"+date;
-	
-	System.out.println(  "html에서 받는 date : "+ pageDate);%>
-	
-	let now = new Date();
-	
-	// 받아온 날짜 세팅
-	let year = <%=year%>;
-	let month = <%=month%> ;
+	<%  Map<String, Integer> pageDateInfo = new HashMap();
 
-	// 기본 달력 날짜 그려주기
-	yoo_drawCalendar(year, month);
-			
-	// 달력에 받아온 데이터값 넣기 
-	yoo_addDataCal();
-
-	// 이전달 버튼 눌렸을 때 
-	yoo_click_pre_month(year,month);
+		// 날짜 정보 받아옴
+		pageDateInfo = (Map) request.getAttribute("pageDateInfo");
+		
+		int year =(int) pageDateInfo.get("pageYear");
+		int month = (int) pageDateInfo.get("pageMonth");	
+		int date = (int) pageDateInfo.get("pageDate");
+		
+		String pageDate = year +"-"+month+"-"+date;
+		
+		System.out.println(  "html에서 받는 date : "+ pageDate);%>
 	
-	// 다음달 버튼 눌렸을 때 
-	yoo_click_next_month(year,month);
+		let now = new Date();
+		
+		// 받아온 날짜 세팅
+		let year = <%=year%>;
+		let month = <%=month%> ;
 	
-	// 달력 안에 cell 눌렀을때
-	click_cell();
+		// 기본 달력 날짜 그려주기
+		yoo_drawCalendar(year, month);
+				
+		// 달력에 받아온 데이터값 넣기 
+		yoo_addDataCal();
 	
-	// 수정 버튼 눌렀을때
-	update_contents();
-	
-	// 수정 취소 버튼 눌렸을 때
-	update_contents_cancel();
-	
-	// 댓글 달기 버튼 눌렀을때
-	click_rpl_chr_btn();
-	
-	// 응원메세지 댓글 입력 버튼 눌렀을 때
-	//click_cheerMsgRplAdd();
+		// 이전달 버튼 눌렸을 때 
+		yoo_click_pre_month(year,month);
+		
+		// 다음달 버튼 눌렸을 때 
+		yoo_click_next_month(year,month);
+		
+		// 달력 안에 cell 눌렀을때
+		click_cell();
+		
+		// 수정 버튼 눌렀을때
+		update_contents();
+		
+		// 수정 취소 버튼 눌렸을 때
+		update_contents_cancel();
+		
+		// 댓글 달기 버튼 눌렀을때
+		click_rpl_chr_btn();
+		
+		// 응원메세지 댓글 입력 버튼 눌렀을 때
+		//click_cheerMsgRplAdd();
+		
+		// 페이징 select 
+		selected_fn();
 }
 
 // 이전달 버튼 눌렸을 때 
@@ -166,6 +192,20 @@ function yoo_addDataCal() {
 	}); 
 }
 
+// 페이징 select selected 설정
+function selected_fn() {
+
+	document.querySelectorAll("select option")[<%=countPerPage%>].setAttribute("selected","selected");
+}
+
+// select_line onclick 함수
+function select_line_fn(){
+	
+	let selectLine = document.querySelector("select option:checked").value;
+	document.querySelector("#countPerPage").setAttribute("value",selectLine );
+	document.select_line_frm.submit();   
+}
+
 </script>
 <script src="/all/calender/cal.js"></script>
 </head>
@@ -227,23 +267,12 @@ function yoo_addDataCal() {
 							
 					<!--응원메세지 출력창-->
 					<div id="yoo_chr_view">
-						<% List<CheerMsgVO> cheerMsglist = (ArrayList)request.getAttribute("cheerMsglist"); %>
+						<% List<CheerMsgVO> cheerMsglist = (ArrayList)chrPagingMap.get("list"); %>
 						
 						<% CheerMsgVO cheerMsgVO = new CheerMsgVO();
-							int nextDepth = 1;	// 다음 댓글의 자식 유무 판단
+						
 	                    for(int i =0 ; i < cheerMsglist.size() ; i++){ %>
-	                    
-	                    	<% // 다음댓글의 번호가 1이면 자식이 없고(대댓), 2이면 자식이 있는것
-	                    	if(i< cheerMsglist.size()-2){
-	                    		CheerMsgVO nextVO = null;
-	                    		nextVO = (CheerMsgVO)cheerMsglist.get(i+1);
-	                    		nextDepth = nextVO.getDEPTH();
-	                    	// 다음 댓글이 없으면 자식이 없으므로 지워져도 되니까 다음댓글을 1로 임의로 지정
-	                    	}else{
-	                    		nextDepth = 1;
-	                    	}
-	                    	%>
-	                    	
+
 	                    	<!-- 응원메세지 1줄 div -->
 							<div class='yoo_chr_msg'>
 								<% cheerMsgVO = (CheerMsgVO)cheerMsglist.get(i);%>
@@ -275,39 +304,6 @@ function yoo_addDataCal() {
 									<input class='yoo_chr_view_del_btn del_chr' type='submit' value='지우기'>
 									<input type="hidden" name="CHR_NO" value="<%= cheerMsgVO.getCHR_NO()%>" />
 									<input type="hidden" name="command" value="cheerMsgDel" />
-									<input type="hidden" name="nowDepth" value="<%= cheerMsgVO.getDEPTH()%>" />
-									<input type="hidden" name="nextDepth" value="<%= nextDepth%>" />
-									
-									<% 
-									
-									//지금 댓글의 원글 갯수와 정보를 보냄(parentsDapth)
-									// 레벨 은 1부터 시작, 현재 내 레벨 빼기 때문에 -1
-									// for 내 dapth-1 만큼 돌림 	
-									Loop1:
-									for( int pDapth = 1; pDapth<cheerMsgVO.getDEPTH(); pDapth++){
-										
-										// if 이전 댓글이 null 인지? 맞으면 (같이 지울 삭제된 댓글 있는지?)
-										if(cheerMsglist.get(i-pDapth).getCHR_MSG() == null){
-											
-											// if depth가 내 depth -1인가  맞으면 (근데 그게 내 부모댓글 인지?)
-											if(cheerMsglist.get(i-pDapth).getDEPTH() == cheerMsgVO.getDEPTH()-pDapth){
-												// chr_no 저장
-												//System.out.println("dsfsdfsdf : "+cheerMsglist.get(i-pDapth).getCHR_NO());
-												%>
-												<input type="hidden" name="pCHR_NO" value="<%=cheerMsglist.get(i-pDapth).getCHR_NO() %>" />
-												<%
-											}else{// else  : 돌필요 없음
-												// for문 끝냄
-												break Loop1;
-											}	
-										}
-										else{ // else : 돌필요 없음
-											// for문 끝냄
-											break;
-										}
-									 }%>
-									
-	
 								</form>
 							<% } %>
 							<!-- 응원메세지 댓글달기 버튼 ( 대댓글은 depth 4까지만 허용)-->
@@ -323,6 +319,45 @@ function yoo_addDataCal() {
 								<input type="hidden" name="CHR_PARENTS_NO" value="<%=cheerMsgVO.getCHR_NO() %>" />
 							</form>
 						<% } %>
+						
+						<!-- 댓글이 없을시 정렬이 깨져서 띄어쓰기 하나 넣음 -->
+						<%if(cheerMsglist.size()==0){%>
+							&nbsp;
+						<% } %>
+						
+					</div>
+
+					<!-- 페이징 번호 div -->
+					<div id="chr_paging_div">
+						<form id="select_line_frm" name="select_line_frm" action="" method="get" >
+						<span style="font-size: 12px;">표시 할 댓글 개수 : ${chrPagingMap.count} , 현재 페이지 : ${ chrPagingMap.pageNum}</span>
+							<select name="select_line" onchange="select_line_fn();" >
+								<option value="0">2 줄 보기</option>
+								<option value="1">3 줄 보기</option>
+								<option value="2">4 줄 보기</option>
+								<option value="3">5 줄 보기</option>
+							</select>
+							<input type="hidden" name="countPerPage" id="countPerPage" >
+						</form>
+						<div id="page_num_div" >
+							<c:if test="<%=firstNo !=1 %>">
+								<a href="<%=uri%>?pageNum=<%=firstNo -1 %>&countPerPage=<%=countPerPage %>" style=" font-weight: bold;" > << </a> &nbsp;
+							</c:if>
+							
+							<c:forEach var = "i" begin="<%=firstNo %>" end="<%=lastNo %>"> 
+							
+								<c:if test="${chrPagingMap.pageNum eq i }" >
+									<a href="<%=uri%>?pageNum=${i}&countPerPage=<%=countPerPage %>" style="color:#14279B; font-weight: bold;" >[${i }]</a> &nbsp;
+								</c:if>
+								<c:if test="${ not (chrPagingMap.pageNum eq i) }" >
+									<a href="<%=uri%>?pageNum=${i}&countPerPage=<%=countPerPage %>">[${i }]</a> &nbsp;
+								</c:if>
+							</c:forEach>
+						
+							<c:if test="<%=lastNo !=lastPage %>">
+								<a href="<%=uri%>?pageNum=<%=lastNo +1 %>&countPerPage=<%=countPerPage %>" style=" font-weight: bold;" > >> </a> &nbsp;
+							</c:if>
+						</div>
 					</div>
 
 				</div>

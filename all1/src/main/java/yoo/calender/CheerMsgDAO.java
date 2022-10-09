@@ -120,7 +120,7 @@ public class CheerMsgDAO {
 			String query = " UPDATE T_CHEERMSG SET CHR_MSG = NULL ";
 			query += " WHERE CHR_NO=? ";
 			pstmt = con.prepareStatement(query);
-			System.out.println("preparedStatement : " + query);
+//			System.out.println("preparedStatement : " + query);
 			System.out.println("vo.getCHR_NO() : "+ vo.getCHR_NO());
 			// 1번째 ? 인 where id= "id"인 애 지움
 			pstmt.setInt(1, vo.getCHR_NO());

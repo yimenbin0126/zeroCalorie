@@ -13,11 +13,15 @@ public class CheerMsgVO {
 	private String NICKNAME; 
 	private String ID;
 	private int DEPTH;
+	private int RNUM;
+
 	
-	
-	
-	
-	
+	public int getRNUM() {
+		return RNUM;
+	}
+	public void setRNUM(int rNUM) {
+		RNUM = rNUM;
+	}
 	public int getDEPTH() {
 		return DEPTH;
 	}

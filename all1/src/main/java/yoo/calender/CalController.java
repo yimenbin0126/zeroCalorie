@@ -78,7 +78,11 @@ public class CalController extends HttpServlet {
 		
 		//////////////// 창 새로고침 되면서 기본적으로 조회되는 것들	
 		// >>>>응원msg db에서 조회 
-		List<CheerMsgVO> cheerMsglist = cheerMsgRead (calPageMbVO);
+		//TODO : 응원메세지 조회 대신 페이징
+//		List<CheerMsgVO> cheerMsglist = cheerMsgRead (calPageMbVO);
+		
+		// 페이징
+		Map chrPagingMap = paging(request,  response, calPageMbVO);
 		
 		// >>>>달력 db에서 조회 
 		List<TodoListVO> calTodolist = calTodoRead(request,  pageDateInfo, calPageMbVO);
@@ -90,8 +94,10 @@ public class CalController extends HttpServlet {
 		List<memberVO> serchMemberlist = searchUser(request);
 		
 		// JSP 페이지로 값들 전달
-		transCalView(request, response, mypage, calPageMbVO, cheerMsglist, 
-								todoListlist, pageDateInfo, calTodolist, serchMemberlist );
+//		transCalView(request, response, mypage, calPageMbVO, cheerMsglist, 
+//								todoListlist, pageDateInfo, calTodolist, serchMemberlist );
+		transCalView(request, response, mypage, calPageMbVO, chrPagingMap,
+				todoListlist, pageDateInfo, calTodolist, serchMemberlist );
 	}
 	
 	public void sendLoginPage(HttpServletResponse response) {
@@ -120,8 +126,8 @@ public class CalController extends HttpServlet {
 		String id = urI.substring(starIdx+1, endIdx);
 		
 		
-//		System.out.println("urL : "+urL);
-//		System.out.println("urI : "+urI);
+		System.out.println("urL : "+urL);
+		System.out.println("urI : "+urI);
 //		System.out.println(urI.indexOf(urL));
 //		System.out.println(urI.length());
 
@@ -158,17 +164,77 @@ public class CalController extends HttpServlet {
 			
 		// 응원메세지 삭제
 		} else if (command != null && command.equals("cheerMsgDel")) {
-		
+			
+			
+			
+			// 페이징 db 한바퀴 돌아서 전부가져옴
+			ChrPagingDAO dao = new ChrPagingDAO();
+			List<CheerMsgVO> cheerMsglist = dao.selectPagingList( calPageMbVO , 0, dao.selectListCount(calPageMbVO));
 
+			CheerMsgVO cheerMsgVO = new CheerMsgVO();
+
+			ArrayList<Integer> pCHR_NOList = new ArrayList<Integer>() ;
+			
+			int nowDepth = 1;
+			int nextDepth = 1;	// 다음 댓글의 자식 유무 판단
+			for(int i =0; i<cheerMsglist.size(); i++) {
+				cheerMsgVO = (CheerMsgVO)cheerMsglist.get(i);
+				
+				// 받아온 chr_no의 i를 찾음
+				if(cheerMsgVO.getCHR_NO()==Integer.parseInt(request.getParameter("CHR_NO"))){
+					
+					// 현재 depth를 저장
+					nowDepth = cheerMsgVO.getDEPTH();
+					
+					// 다음 댓글의 번호가 1이면 자식(대댓글)이 없고, 2 이면 있는것
+					if (i< cheerMsglist.size()-2) {
+						
+						CheerMsgVO nextVO = new CheerMsgVO();
+                		nextVO = (CheerMsgVO)cheerMsglist.get(i+1);
+                		nextDepth = nextVO.getDEPTH();
+                		
+                	// 다음 댓글이 없으면 자식이 없으므로 지워져도 되니까 다음댓글을 1로 줌
+					}else {
+						nextDepth = 1;
+					}
+					
+					// 지금 댓글의 원글 갯수와 정보를 보냄(parentsDapth)
+					// 레벨 은 1부터 시작, 현재 내 레벨 빼기 때문에 -1
+					// for 내 dapth-1 만큼 돌림 	
+					Loop1:
+					for( int pDapth = 1; pDapth<cheerMsgVO.getDEPTH(); pDapth++){
+						
+						// if 이전 댓글이 null 인지? 맞으면 (같이 지울 삭제된 댓글 있는지?)
+						if(cheerMsglist.get(i-pDapth).getCHR_MSG() == null){
+							
+							// if depth가 내 depth -1인가  맞으면 (근데 그게 내 부모댓글 인지?)
+							if(cheerMsglist.get(i-pDapth).getDEPTH() == cheerMsgVO.getDEPTH()-pDapth){
+								// chr_no 저장
+								pCHR_NOList.add(cheerMsglist.get(i-pDapth).getCHR_NO());
+								
+							}else{// else  : 돌필요 없음
+								// for문 끝냄
+								break Loop1;
+							}	
+						}
+						else{ // else : 돌필요 없음
+							// for문 끝냄
+							break;
+						}
+					 }
+				}
+			} 
+			
+			
 			// 대댓글이 없는 글이라면 삭제 (다음 댓글의 Depth가 현재 Depth 보다 작거나 같으면)
 			// 하고 위에 부모댓글도 내용이 없으면 삭제
-			if(Integer.parseInt(request.getParameter("nextDepth"))<=Integer.parseInt(request.getParameter("nowDepth")) ) {
-				System.out.println("nextDepth : "+Integer.parseInt(request.getParameter("nextDepth")));
-				cheerMsgDel(request); 
+			if(nextDepth<=nowDepth) {
+				System.out.println("nextDepth : "+nextDepth);
+				cheerMsgDel(request, pCHR_NOList); 
 				
 			// 대댓글이 있다면 내용만 비움(삭제된 메세지입니다로 표시하게됨)
 			}else {
-				System.out.println("nextDepth : "+Integer.parseInt(request.getParameter("nextDepth")));
+				System.out.println("nextDepth : "+nextDepth);
 				cheerMsgEmpty(request);
 			}
 
@@ -229,7 +295,7 @@ public class CalController extends HttpServlet {
 		}catch(Exception e) {e.printStackTrace();}
 	}
 	// 응원 msg db에서 삭제
-	public void cheerMsgDel(HttpServletRequest request) {
+	public void cheerMsgDel(HttpServletRequest request, List<Integer> pCHR_NOList) {
 		try {
 			System.out.println("cheerMsgdel 요청");
 			CheerMsgVO vo = new CheerMsgVO();
@@ -241,17 +307,14 @@ public class CalController extends HttpServlet {
         
         
 	        /////// 부모댓글도 지울 기능 넣을지 말지 고민되서 따로 넣음
-	        if(request.getParameterValues("pCHR_NO")!=null) {
+	        if(pCHR_NOList !=null) {
 	        	
-	            String[] pCHR_NO = request.getParameterValues("pCHR_NO");
-	
-	    		for(String CHR_NO : pCHR_NO) {
+	    		for(int CHR_NO : pCHR_NOList) {
 	    			System.out.println("삭제할 부모 CHR_NO : "+CHR_NO);
-	    			vo.setCHR_NO(Integer.parseInt(CHR_NO));
+	    			vo.setCHR_NO(CHR_NO);
 	    			
 	    			cheerMsgDAO.del(vo);
 	    		}
-	        	
 	        }
 	        ///////////////////////////////////////////////////////////
 		}catch(Exception e) {e.printStackTrace();}
@@ -260,7 +323,7 @@ public class CalController extends HttpServlet {
 	
 	// calTodoRead 달력에 월간 정보 조회
 	public List<TodoListVO> calTodoRead(HttpServletRequest request, Map pageDateInfo, CalPageMbVO calPageMbVO) {
-		List<TodoListVO> calTodolist = List.of();
+		List<TodoListVO> calTodolist = new ArrayList<TodoListVO>();
 
 		String dateMonth = "" + pageDateInfo.get("pageYear") + "-"
 				+ (Integer.parseInt(pageDateInfo.get("pageMonth").toString()) + 1);
@@ -400,13 +463,13 @@ public class CalController extends HttpServlet {
 	
 	// JSP 페이지로 값들 전달
  	public void transCalView(HttpServletRequest request, HttpServletResponse response, 
- 								boolean mypage, CalPageMbVO calPageMbVO, List<CheerMsgVO> cheerMsglist, 
+ 								boolean mypage, CalPageMbVO calPageMbVO, Map chrPagingMap, 
  								List<TodoListVO> todoListlist, Map pageDateInfo, List<TodoListVO> calTodolist,
  								List<memberVO> serchMemberlist) {
  		
 		request.setAttribute("mypage", mypage);
 		request.setAttribute("calPageMbVO", calPageMbVO);
-		request.setAttribute("cheerMsglist", cheerMsglist);
+		request.setAttribute("chrPagingMap", chrPagingMap);
 		request.setAttribute("todoListlist", todoListlist);
 		request.setAttribute("pageDateInfo", pageDateInfo);
 		request.setAttribute("calTodolist", calTodolist);
@@ -422,6 +485,85 @@ public class CalController extends HttpServlet {
 			e.printStackTrace();
 		} 
 		
+	}
+ 	
+ 	//>>> 페이징 관련
+ 	
+ 	public Map paging(HttpServletRequest request, HttpServletResponse response, CalPageMbVO calPageMbVO) {
+		
+		
+		int[] countPerPageArr = {2,3,4,5}; // 한 페이지당 보여줄 글 개수
+		
+		// 기본값
+		int pageNum = 1; // 현재페이지
+		int countPerPage = 3;
+		
+		String str_pageNum = request.getParameter("pageNum");
+		String str_countPerPage = request.getParameter("countPerPage");
+		
+		
+		
+//		if (str_pageNum != null) {
+//			pageNum = Integer.parseInt(str_pageNum);
+//		}
+//		if (str_countPerPage != null) {
+//			countPerPage = Integer.parseInt(str_countPerPage);
+//		}
+		
+		try {
+			pageNum = Integer.parseInt(str_pageNum);
+		} catch (NumberFormatException nfe) {}
+		
+		try {
+			// 변환한 str_countPerPage 의 값이 배열 길이 안에 있으면 저장해줌
+			if(Integer.parseInt(str_countPerPage) < countPerPageArr.length) {
+				countPerPage = Integer.parseInt(str_countPerPage);
+			}
+		} catch (NumberFormatException nfe) {}
+
+		
+		Map chrPagingMap = getPagingList(calPageMbVO, pageNum, countPerPage, countPerPageArr);
+		chrPagingMap.put("pageNum", pageNum);
+		chrPagingMap.put("countPerPage", countPerPage);
+		chrPagingMap.put("countPerPageArr", countPerPageArr);
+		chrPagingMap.put("uri", request.getRequestURI());
+
+		return chrPagingMap;
+	}
+	
+	public Map getPagingList(CalPageMbVO calPageMbVO, int pageNum, int countPage, int[] countPerPageArr){
+		
+		countPage = countPerPageArr[countPage];
+		
+		System.out.println("countPage : "+countPage);
+		ChrPagingDAO dao = new ChrPagingDAO();
+		
+		int start=0, end=0;
+		
+		// 1,5
+		// start = 1, end = 5
+		// 2,5
+		// start = 6, end = 10
+		// 3,5
+		// start = 11, end = 15
+		
+		start = ((pageNum-1)*countPage) +1;
+		end = pageNum*countPage;
+		end = start + countPage-1;
+		
+		
+		List<CheerMsgVO> list = dao.selectPagingList(calPageMbVO, start, end);
+		
+		int count =  dao.selectListCount(calPageMbVO);
+		
+		Map chrPagingMap = new HashMap();
+		chrPagingMap.put("list", list);
+		chrPagingMap.put("count", count);
+		
+		System.out.println("count : " + count);
+		
+		return chrPagingMap;
+				
 	}
 
 }

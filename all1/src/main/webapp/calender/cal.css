@@ -11,9 +11,15 @@ body{
     background-repeat: no-repeat;
     background-size:cover;
     color: rgb(39, 56, 104);
-
 }
 
+a{
+	text-decoration: none;
+	color: gray;
+}
+a:visited{
+	color: gray;
+}
 #j_wrap {
     text-align: center;
     /* width: 1263px; 여기 width 왜 준것인지..? */
@@ -269,7 +275,7 @@ padding : 15px 0px 15px 0px;
 /*응원메세지 관련*/
 #yoo_chr_obj{ 
     width: 400px;
-    height: 200px;
+    height: 250px;
     display: inline-block;
 }
 /*응원메세지 버튼+입력창 div 플렉스*/
@@ -314,10 +320,26 @@ padding : 15px 0px 15px 0px;
     display: inline-block;
     width: 400px;
     height: 132px;
-    overflow: auto;
+    /* overflow: auto; */
     color: black;
     text-align: left;
     /* border: 1px dotted rgb(136, 136, 215); */
+}
+
+/* 응원메세지 페이징 번호 div*/
+#chr_paging_div{
+	display: inline-block;
+	width: 400px;
+	height: 50px;
+}
+
+#select_line_frm{
+	height:23px;
+	text-align: right;
+}
+#page_num_div{
+	height: 23px;
+	text-align: center;
 }
 
 /*생성된 메세지*/
@@ -329,7 +351,6 @@ display: inline-block;
 
 
 
-/* ///////////동현씨가 할 부분 ////////////////// */
 /*친구찾기 관련*/
 #yoo_find_obj{
     height: 200px;
@@ -367,8 +388,6 @@ display: inline-block;
     text-align: left;
     /* border: 1px dotted rgb(136, 136, 215); */
 }
-
-/* ///////////동현씨가 할 부분 ////////////////// */
 
 
 /*라인*/
