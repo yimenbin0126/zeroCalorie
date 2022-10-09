@@ -275,7 +275,7 @@ padding : 15px 0px 15px 0px;
 /*응원메세지 관련*/
 #yoo_chr_obj{ 
     width: 400px;
-    height: 250px;
+    height: 200px;
     display: inline-block;
 }
 /*응원메세지 버튼+입력창 div 플렉스*/
@@ -319,7 +319,7 @@ padding : 15px 0px 15px 0px;
 	margin-top: 5px;
     display: inline-block;
     width: 400px;
-    height: 132px;
+    height: 120px;
     /* overflow: auto; */
     color: black;
     text-align: left;
@@ -381,7 +381,7 @@ display: inline-block;
 /*친구찾기표시창*/
 #yoo_find_view{
 	margin-top: 5px;
-    height: 130px;
+    height: 145px;
     width: 200px;
     overflow: auto;
     color: inline-black;
