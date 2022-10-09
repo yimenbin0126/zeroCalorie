@@ -338,8 +338,20 @@ padding : 15px 0px 15px 0px;
 	text-align: right;
 }
 #page_num_div{
-	height: 23px;
-	text-align: center;
+	display:flex;
+	height: 25px;
+	justify-content: center;
+	align-items: center;
+}
+.paging_a{
+	width:30px;
+	font-size: 15px;
+	/* border: 1px solid red; */
+	
+}
+.paging_a:hover{
+	font-size: 23px;
+	
 }
 
 /*생성된 메세지*/

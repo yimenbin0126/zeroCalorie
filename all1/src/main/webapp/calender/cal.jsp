@@ -341,21 +341,21 @@ function select_line_fn(){
 						</form>
 						<div id="page_num_div" >
 							<c:if test="<%=firstNo !=1 %>">
-								<a href="<%=uri%>?pageNum=<%=firstNo -1 %>&countPerPage=<%=countPerPage %>" style=" font-weight: bold;" > << </a> &nbsp;
+								<a class="paging_a" href="<%=uri%>?pageNum=<%=firstNo -1 %>&countPerPage=<%=countPerPage %>" style=" font-weight: bold;" > << </a> &nbsp;
 							</c:if>
 							
 							<c:forEach var = "i" begin="<%=firstNo %>" end="<%=lastNo %>"> 
 							
 								<c:if test="${chrPagingMap.pageNum eq i }" >
-									<a href="<%=uri%>?pageNum=${i}&countPerPage=<%=countPerPage %>" style="color:#14279B; font-weight: bold;" >[${i }]</a> &nbsp;
+									<a class="paging_a" href="<%=uri%>?pageNum=${i}&countPerPage=<%=countPerPage %>" style="color:#14279B; font-weight: bold;" > ${i } </a> &nbsp;
 								</c:if>
 								<c:if test="${ not (chrPagingMap.pageNum eq i) }" >
-									<a href="<%=uri%>?pageNum=${i}&countPerPage=<%=countPerPage %>">[${i }]</a> &nbsp;
+									<a class="paging_a" href="<%=uri%>?pageNum=${i}&countPerPage=<%=countPerPage %>"> ${i } </a> &nbsp;
 								</c:if>
 							</c:forEach>
 						
 							<c:if test="<%=lastNo !=lastPage %>">
-								<a href="<%=uri%>?pageNum=<%=lastNo +1 %>&countPerPage=<%=countPerPage %>" style=" font-weight: bold;" > >> </a> &nbsp;
+								<a class="paging_a" href="<%=uri%>?pageNum=<%=lastNo +1 %>&countPerPage=<%=countPerPage %>" style=" font-weight: bold;" > >> </a> &nbsp;
 							</c:if>
 						</div>
 					</div>
