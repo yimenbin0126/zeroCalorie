@@ -4,10 +4,9 @@
 - 3조 아시겠조
 - 프로젝트명 : 0칼로리
 - 기능 목표 : servlet과 jsp로 crud 게시판 만들기
-- 기술 스택 : java, jsp, css, js
-- 설명 : 다이어트 관리 웹 애플리케이션 개발
-- 목적 : 요즘 떠오르는 다이어트 주제로,
-홈페이지에서 쉽고 간편하게 사용자가 자신의 다이어트 관리를 하기 위해 만들어진 사이트
+- 기술 스택 : Java, Javascript, jQuery, CSS, HTML, jsp, OracleDB
+- 개발 환경 : Eclipse, JDK 11.0.15, Apache Tomcat 9.0, Maven
+- 설명 : 다이어트 관리 웹 기반 애플리케이션 구현
 
 ## <b>팀원</b>
 - 임은빈(팀장), 김지수, 김택준, 유소연, 이동현, 류정은
@@ -115,3 +114,6 @@
 <img width="900" alt="(6) 커뮤니티 - 글 작성하기" src="https://user-images.githubusercontent.com/93369732/197060924-c2697289-cd60-41d3-a8d0-a4120a1d2247.png">
 <br>
 
+
+## 참고사이트
+- 동면중(운동도우미 웹) https://wintersleeping.com/
